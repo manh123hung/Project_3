@@ -1,0 +1,272 @@
+.container1 {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+    font-family: 'Philosopher';
+  }
+  
+  .left-content {
+    width: 50%;
+    padding-right: 20px;
+  }
+  
+  .right-content {
+    width: 50%;
+  }
+  
+  h1 {
+    font-size: 36px;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  
+  h2 {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  
+  p {
+    line-height: 1.5;
+    margin-bottom: 10px;
+  }
+  
+  ul {
+    list-style: disc;
+    margin-left: 20px;
+  }
+  .line {
+    width: 100px; /* Chiều rộng của đường kẻ */
+    height: 8px; /* Độ dày của đường kẻ */
+    background-color: #003F7D; /* Màu của đường kẻ */
+    margin-top: 10px; /* Khoảng cách từ chữ xuống đường kẻ */
+  }
+  .button {
+    background-color: #0054A6 ;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .image-container {
+    position: relative;
+    width: 100%;
+  }
+  
+  .image-container img {
+    width: 100%;
+    height: auto;
+  }
+  
+  .image-container .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
+    font-weight: bold;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+  
+  .image-container:hover .overlay {
+    opacity: 1;
+  }
+  
+  .image-container-top,
+  .image-container-bottom {
+    width: 100%; /* Điều chỉnh kích thước hình ảnh */
+  }
+  
+  .image-container-bottom {
+    position: relative;
+    top: -100px; /* Điều chỉnh giá trị này để thay đổi mức độ chồng chéo */
+    margin-left: 10%; /* Điều chỉnh giá trị này để căn chỉnh hình ảnh */
+  }
+  
+  .image-container img {
+    width: 80%; /* Điều chỉnh chiều rộng của hình ảnh */
+    height: auto; /* Tự động điều chỉnh chiều cao dựa trên chiều rộng */
+  }
+  
+  .blue-line {
+    padding-left: 10px; /* Khoảng cách từ đường kẻ đến văn bản */
+    border-left: 5px solid blue; /* Độ dày, kiểu và màu của đường kẻ */
+  }
+  .service-card {
+    text-align: center;
+    margin-bottom: 20px; /* Khoảng cách giữa các thẻ */
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 15px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    margin-left: 4px;
+    flex: 1 0 30%; /* Chiều rộng của thẻ */
+  }
+
+.service-card img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+}
+.service-card p {
+  color: #666666;
+  font-size: 14px;
+}
+
+.tx {
+  color: #EC008C;
+  font-family: "Bangers"; /* Use cursive for Bangers if it's not available */
+  line-height: 53.2px;
+}
+
+/* Centering the content within the service card */
+.service-card .card-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.wt{
+background-color: white;
+height: 120px;
+
+}
+.header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.header h1 {
+  font-size: 2.5em;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.header h2 {
+  font-size: 2.6em;
+  margin-bottom: 10px;
+  color: #003F7D;
+}
+
+.header p {
+  font-size: 1em;
+  color: white;
+}
+
+.content {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.post {
+  width: 30%;
+  margin-bottom: 20px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.post img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.post-info {
+  padding: 15px;
+}
+
+.author {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.author span {
+  font-size: 0.8em;
+  color: #666;
+}
+
+.author .dot {
+  margin-left: 5px;
+  width: 5px;
+  height: 5px;
+  background-color: green;
+  border-radius: 50%;
+}
+
+.post-info h3 {
+  font-size: 1.2em;
+  margin-bottom: 10px;
+  color: #0054A6;
+  
+}
+
+.post-info p {
+  font-size: 0.9em;
+  color: #666;
+  line-height: 1.5;
+}
+
+.tags {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.tags span {
+  font-size: 0.8em;
+  background-color: #E6EEF7;
+  padding: 5px 10px;
+  border-radius: 5px;
+  color: #666;
+  margin-right:35px;
+  color: #0054A6;
+}
+
+.date {
+  display: flex;
+  justify-content: space-between;
+}
+
+.date span {
+  font-size: 0.8em;
+  color: #666;
+}
+
+.button1 {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.button1 button {
+  background-color: #0054A6  ;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.c01 {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+ font-family: "Philosopher";  
+}
+.logo5{
+  width: 400px;
+  height: 260px;
+  margin-left: 840px;
+  margin-top: -20px;
+  opacity: 0.1;
+}

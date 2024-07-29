@@ -1,0 +1,60 @@
+.filter, .search {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.filter label, .search label {
+    margin-right: 10px;
+}
+
+.filter input, .search input {
+    padding: 8px;
+    border: 1px solid #ddd;
+    margin-right: 10px;
+}
+
+.filter button, .search button {
+    padding: 8px 16px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+th, td {
+    text-align: left;
+    padding: 8px;
+    border: 1px solid #ddd;
+}
+
+th {
+    background-color: #007bff;
+    color: white;
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.pagination a {
+    color: black;
+    float: left;
+    padding: 8px 16px;
+    text-decoration: none;
+    border: 1px solid #ddd;
+    margin: 4px 2px;
+}
+
+.pagination a.active {
+    background-color: #007bff;
+    color: white;
+}
