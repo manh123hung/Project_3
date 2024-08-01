@@ -80,7 +80,7 @@ const Navbar = () => {
         <ul className="nav-links">
           <li>
             <Link
-              to="/tai-lieu"
+              to="/Tailieu"
               style={location.pathname === '/Tailieu' ? { textDecoration: 'underline', color: '#99FFFF' } : {}}
             >
               TÀI LIỆU
@@ -88,8 +88,8 @@ const Navbar = () => {
           </li>
           <li>
             <Link
-              to="/tuyen-dung"
-              style={location.pathname === '/tuyen-dung' ? { textDecoration: 'underline', color: '#99FFFF' } : {}}
+              to="/Tuyendung"
+              style={location.pathname === '/Tuyendung' ? { textDecoration: 'underline', color: '#99FFFF' } : {}}
             >
               TUYỂN DỤNG
             </Link>

@@ -1,0 +1,47 @@
+.sidebar {
+  background-color: rgba(255, 255, 255, 0.8);
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  height: 1090px;
+}
+
+.logo4{
+  width: 340px;
+  height: 260px;
+  margin-left: 2px;
+  margin-top: 60px;
+}
+  .sidebar h4 {
+    margin-bottom: 10px;
+    color: #0054A6;
+    padding: 10px;
+  }
+  
+  .sidebar .button-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+  
+  .sidebar .button {
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    padding: 8px 15px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    cursor: pointer;
+    color: black;
+  }
+  .button-group .button:first-child {
+    background-color: #0054A6;
+    color: white; /* Thay đổi màu chữ để tương phản */
+  }
+  
+  .sidebar .button:hover {
+    background-color: #e9ecef;
+  }

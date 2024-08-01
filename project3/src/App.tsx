@@ -8,6 +8,8 @@ import Navbar from './component/Navbar';
 import Footer from './component/Footer';
 import TrangchuPages from './pages/TrangchuPages/TrangchuPages';
 import TailieuPages from './pages/TaiLieuPages/TailieuPages';
+import TuyendungPages from './pages/TuyendungPages/TuyendungPages';
+import Chitiet from './pages/TuyendungPages/TuyendungPages-Chitiet';
 function App() {
   const [data, setData] = useState<DocumentData[]>([]);
 
@@ -35,6 +37,8 @@ function App() {
       <Routes>
       <Route path="/" element={<TrangchuPages  />} />
       <Route path="/Tailieu" element={<TailieuPages  />} />
+      <Route path="/Tuyendung" element={<TuyendungPages  />} />
+      <Route path="/Chitiet" element={<Chitiet  />} />
 
 
       </Routes>

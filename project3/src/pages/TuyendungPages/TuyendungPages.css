@@ -1,0 +1,56 @@
+.table1{
+    width: 100%;
+    border-collapse: collapse;
+  }
+  th, td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+  }
+  th {
+    background-color: #f2f2f2;
+    border-right: 1px solid #ddd; /* Thêm đường kẻ bên phải */
+  }
+  td {
+    border-right: 1px solid #ddd; /* Thêm đường kẻ bên phải cho các ô td */
+  }
+  .company-logo {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    margin-right: 15px;
+  }
+
+  .job-title {
+    margin-bottom: -5px;
+
+    font-size: 14px;
+    color: #666;
+    font-size: 34px;
+    font-weight: bold;
+    color: #333;
+  }
+
+  .job-description {
+    margin-bottom: -5px;
+
+    font-size: 14px;
+    color: #666;
+  }
+
+  .job-info {
+    margin-top: 5px;
+    font-size: 14px;
+    color: #666;
+  }
+
+  .job-info i {
+  }
+
+  .apply-button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 20px;
+  }

@@ -10,17 +10,26 @@
 
 .filter input, .search input {
     padding: 8px;
-    border: 1px solid #ddd;
     margin-right: 10px;
 }
+.date-form{
+    color:"#0054A6";
+}
+.pagination .page-item.active .page-link {
+    background-color: #0054A6; /* Thay đổi màu nền mong muốn */
+    color: white; /* Thay đổi màu chữ mong muốn */
+  }
 
 .filter button, .search button {
     padding: 8px 16px;
-    background-color: #007bff;
+    background-color: #0054A6;   
     color: white;
     border: none;
     cursor: pointer;
 }
+.form-group .input-group {
+    border: none; /* Loại bỏ khung viền */
+  }
 
 table {
     width: 100%;
@@ -28,33 +37,142 @@ table {
     margin-top: 20px;
 }
 
-th, td {
-    text-align: left;
-    padding: 8px;
-    border: 1px solid #ddd;
-}
 
-th {
-    background-color: #007bff;
-    color: white;
-}
 
-.pagination {
-    display: flex;
-    justify-content: center;
-    margin-top: 20px;
-}
 
 .pagination a {
+    
     color: black;
-    float: left;
-    padding: 8px 16px;
-    text-decoration: none;
-    border: 1px solid #ddd;
-    margin: 4px 2px;
+   
+}
+.page-number {
+    display: inline-block;
+    padding: 7px 10px;
+    border: 2px solid #0054A6; /* Màu viền */
+    border-radius: 4px; /* Bo tròn góc */
+    background-color: white; /* Màu nền */
+    color: #0054A6; /* Màu chữ */
+    font-size: 14px; /* Kích thước chữ */
+    font-weight: bold; /* Chữ đậm */
+    cursor: pointer; /* Hiển thị con trỏ tay */
+  }
+.tr{
+    margin-bottom: 20px; /* Khoảng trắng 20px */
 }
 
+.c012 {
+    position: relative; /* Cho phép đặt các thẻ card lên video */
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Căn giữa theo chiều ngang */
+  }
+  
+  .cards-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center; /* Căn giữa theo chiều ngang */
+    gap: 20px; /* Khoảng cách giữa các thẻ */
+  }
+  
+  .card1 {
+    background-color: rgba(255, 255, 255, 0.8);
+    border: none;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    transition: transform 0.3s ease;
+    width: 177.55px; /* Cài đặt chiều rộng cho thẻ card */
+    height: 261px; /* Cài đặt chiều cao cho thẻ card */
+    position: relative; /* Cho phép đặt ảnh lên trên */
+  }
+  
+  .card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+  }
+  
+  .card-body {
+    text-align: center;
+  }
+  
+  .card-title {
+    font-size: 15px;
+    font-weight: bold;
+    position: absolute; /* Đặt tiêu đề lên trên ảnh */
+    top: 70%; /* Căn giữa theo chiều dọc */
+    left: 50%; /* Căn giữa theo chiều ngang */
+    transform: translate(-50%, -50%); /* Căn giữa theo chiều ngang và dọc */
+    color: #fff; /* Màu chữ trắng */
+    white-space: nowrap; /* Ngăn dòng mới */
+    overflow: hidden; /* Ẩn nội dung thừa */
+    text-overflow: ellipsis; /* Hiển thị dấu "..." */
+    /* Điều chỉnh khoảng cách giữa các dòng */
+  }
+  
+  .card-text {
+    font-size: 14px;
+    position: absolute; /* Đặt nội dung lên trên ảnh */
+    bottom: 50px; /* Khoảng cách từ dưới lên */
+    left: 50%; /* Căn giữa theo chiều ngang */
+    transform: translateX(-50%); /* Căn giữa theo chiều ngang */
+    color: #fff; /* Màu chữ trắng */
+    white-space: nowrap; /* Ngăn dòng mới */
+    overflow: hidden; /* Ẩn nội dung thừa */
+    text-overflow: ellipsis; /* Hiển thị dấu "..." */
+  }
+  
+  .title {
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 10px 20px;
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 30px;
+    clip-path: polygon(75% 0, 100% 50%, 75% 100%, 25% 100%, 0 50%, 25% 0);
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    width: 300px;
+    height: 50px;
+    margin-left: 320px;
+    position: relative; /* Cho phép đặt ảnh lên trên */
+    top: 50%; /* Căn giữa theo chiều dọc */
+    transform: translateY(-50%); /* Căn giữa theo chiều dọc */
+  }
+  
+  .card-body img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Điều chỉnh kích thước ảnh cho phù hợp */
+    position: absolute; /* Đặt ảnh lên trên */
+    top: 0; /* Vị trí ảnh */
+    left: 0; /* Căn trái */
+  }
+.nv1 {
+  background-color: white;
+  border: 1px solid black;
+  box-shadow:
+  5px 0px 10px -3px rgba(0, 0, 0, 0.5), /* Bóng bên phải */
+  -5px 0px 10px -3px rgba(0, 0, 0, 0.5), /* Bóng bên trái */
+  0px 5px 10px -3px rgba(0, 0, 0, 0.5), /* Bóng bên dưới */
+  0px -5px 10px -3px rgba(0, 0, 0, 0.5); /* Bóng bên trên */ /* Bóng bên trên */
+  
+  height: 660px;
+  width: 1294px;
+  margin-left: 180px;
+}
+.s1 {
+    color:white;
+}
 .pagination a.active {
     background-color: #007bff;
     color: white;
+}
+.fc1{
+ border:none;
+ color:rgb(0, 84, 166);
+}
+.fc2{
+    color:#0054A6;
+  
 }
