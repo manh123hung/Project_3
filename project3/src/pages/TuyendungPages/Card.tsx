@@ -83,7 +83,7 @@ const Card: React.FC<CardProps> = ({ title, description, title2 }) => {
           <p>{description}</p>
         </div>
         <div className="card-footer">
-          <button className="button">Xem chi tiết</button>
+        <Link to="/TuyendungChitiet" className="button" style={{textAlign:"center",textDecoration:"none"}}> Xem chi tiết </Link>
         </div>
       </div>
     </div>

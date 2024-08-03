@@ -8,23 +8,16 @@ import Navbar from '../../component/Navbar';
 import Footer from '../../component/Footer';
 import './TuyendungPages.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faAngleDoubleDown, faChevronRight, faDownload, faSearch } from '@fortawesome/free-solid-svg-icons';
+import { faMapMarkerAlt, faClock } from '@fortawesome/free-solid-svg-icons';
+
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
-import Sidebar from './Sidebar';
-import Content from './Content';
-function Chitiet() {
+
+function TuyendungChitiet() {
 
   const [logo4, setLogo4] = useState('');
   const [hinh1, sethinh1] = useState('');
   const [hinh2, sethinh2] = useState('');
-  const [hinh3, sethinh3] = useState('');
-  const [hinh4, sethinh4] = useState('');
-  const [hinh5, sethinh5] = useState('');
-  const [hinh6, sethinh6] = useState('');
-  const [hinh7, sethinh7] = useState('');
-  const [hinh8, sethinh8] = useState('');
-  const [logo5, setLogo5] = useState('');
   const [uploadProgress, setUploadProgress] = useState(0);
   const [download, setDownload] = useState('');
   const [data, setData] = useState<DocumentData[]>([]);
@@ -41,37 +34,18 @@ function Chitiet() {
 
   useEffect(() => {
     // Lấy ảnh từ Firebase Storage
-    const hinh1Ref = ref(storage, 'TailieuPages/img (3).png'); 
-    const hinh2Ref = ref(storage, 'TailieuPages/img (4).png'); 
-    const hinh3Ref = ref(storage, 'TailieuPages/img (5).png'); 
-    const hinh4Ref = ref(storage, 'TailieuPages/img (6).png'); 
-    const hinh5Ref = ref(storage, 'TailieuPages/img (7).png'); 
-    const hinh6Ref = ref(storage, 'TailieuPages/img (8).png'); 
-    const hinh7Ref = ref(storage, 'TailieuPages/img (9).png'); 
-    const hinh8Ref = ref(storage, 'TailieuPages/img (10).png'); 
-    const logo5= ref(storage, "TailieuPages/Files.png");
+    const hinh1Ref = ref(storage, 'TuyendungPages/Group 11 (1).png'); 
+    const hinh2Ref = ref(storage, 'TuyendungPages/image 27.png'); 
     Promise.all([
       getDownloadURL(hinh1Ref),
       getDownloadURL(hinh2Ref),
-      getDownloadURL(hinh3Ref),
-      getDownloadURL(hinh4Ref),
-      getDownloadURL(hinh5Ref),
-      getDownloadURL(hinh6Ref),
-      getDownloadURL(hinh7Ref),
-      getDownloadURL(hinh8Ref),
-      getDownloadURL(logo5),
+
 
     ])
       .then((urls) => {
         sethinh1(urls[0]);
         sethinh2(urls[1]);
-        sethinh3(urls[2]);
-        sethinh4(urls[3]);
-        sethinh5(urls[4]);
-        sethinh6(urls[5]);
-        sethinh7(urls[6]);
-        sethinh8(urls[7]);
-        setLogo5(urls[8])
+       
       })
       .catch((error) => {
         console.log('Error getting URLs:', error);
@@ -166,14 +140,14 @@ function Chitiet() {
     <div className='row'>
   <div className="col-md-10">
     <div className="d-flex align-items-center">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/21/Flag_of_Vietnam.svg/1200px-Flag_of_Vietnam.svg.png" alt="Logo" className="company-logo" />
+      <img src={hinh1} />
       <div>
         <h1 className="job-title" style={{color:"#003F7D"}}> <b> Nhân viên thiết kế đồ họa</b></h1>
 
         <p className="job-description" style={{color:"#003F7D"}}>Nhân viên chính thức</p>
         <div className="job-info">
-          <i className="fas fa-map-marker-alt" /> CVVH Đầm Sen
-          <i className="fas fa-clock" /> 2 tuần trước
+        <FontAwesomeIcon icon={faMapMarkerAlt} /> CVVH Đầm Sen&nbsp;&nbsp;
+        <FontAwesomeIcon icon={faClock} /> 2 tuần trước
         </div>
       </div>
     </div>
@@ -183,6 +157,7 @@ function Chitiet() {
 
   </div>
 </div>
+<img src={hinh2} className='img-fluid' />
 </div>
 
 <h1 style={{color:"#003F7D"}} >Chi tiết tuyển dụng</h1>
@@ -384,4 +359,4 @@ function Chitiet() {
   );
 }
 
-export default Chitiet;
+export default TuyendungChitiet;

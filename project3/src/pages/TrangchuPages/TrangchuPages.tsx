@@ -130,24 +130,60 @@ function TrangchuPages() {
     {
       image: hinh6,
       author: 'Admin',
-      title: 'Thông báo kết quả lựa chọn nhà thầu 2 màn hình Led P4 Outdoor Fullcolor',
-      content: 'Công ty Cổ phần Dịch vụ Du lịch Phú Thọ thông báo đến các nhà thầu tham gia chào hàng cạnh tranh Gói thầu: Cung cấp, lắp đặt 02 màn...',
+      title: <div>
+            {data.map((item, index) => (
+            <div key={index}>
+              <div dangerouslySetInnerHTML={{ __html: item.ND4 }} />
+            </div>
+          ))}
+      </div>,
+      content: <div>
+      {data.map((item, index) => (
+      <div key={index}>
+        <div dangerouslySetInnerHTML={{ __html: item.ND7 }} />
+      </div>
+    ))}
+</div>,
       tags: ['Sự kiện', 'Thông báo', 'Tin tức'],
       date: '10N lượt xem - 20/02/2022',
     },
     {
       image: hinh7,
       author: 'Admin',
-      title: 'Thông báo kết quả lựa chọn nhà cung cấp nước đá chế tác Băng Đăng',
-      content: 'Công ty Cổ phần Dịch vụ Du lịch Phú Thọ thông báo đến các đơn vị tham gia chào giá cạnh tranh Hạng mục Cung cấp nước đã để chế tạo...',
+      title: <div>
+      {data.map((item, index) => (
+      <div key={index}>
+        <div dangerouslySetInnerHTML={{ __html: item.ND6 }} />
+      </div>
+    ))}
+</div>,
+      content:<div>
+      {data.map((item, index) => (
+      <div key={index}>
+        <div dangerouslySetInnerHTML={{ __html: item.ND8 }} />
+      </div>
+    ))}
+</div> ,
       tags: ['Sự kiện', 'Thông báo', 'Tin tức'],
       date: '10N lượt xem - 20/02/2022',
     },
     {
       image: hinh8,
       author: 'Admin',
-      title: 'Thông báo mời chào hàng cạnh tranh 2 màn hình Led P4 Outdoor Fullcolor',
-      content: 'CÔNG TY CỔ PHẦN DỊCH VỤ DU LỊCH PHÚ THỌ thông báo mời chào hàng cạnh tranh lựa chọn đơn vị Cung cấp, lắp đặt 02 màn hình Led P4',
+      title: <div>
+      {data.map((item, index) => (
+      <div key={index}>
+        <div dangerouslySetInnerHTML={{ __html: item.ND6 }} />
+      </div>
+    ))}
+</div>,
+      content: <div>
+      {data.map((item, index) => (
+      <div key={index}>
+        <div dangerouslySetInnerHTML={{ __html: item.ND9 }} />
+      </div>
+    ))}
+</div>,
       tags: ['Sự kiện', 'Thông báo', 'Tin tức'],
       date: '10N lượt xem - 20/02/2022',
     },
@@ -173,27 +209,25 @@ function TrangchuPages() {
       <div className='container'>
       <div className="container1">
         <div className="left-content">
-          <h1>VỀ CHÚNG TÔI</h1>
-          <h2 style={{color:"#003F7D"}}>Chúng tôi cung cấp dịch vụ du lịch đáp ứng mọi nhu cầu của bạn!</h2>
+          <h3>   
+            {data.map((item, index) => (
+            <div key={index}>
+              <div dangerouslySetInnerHTML={{ __html: item.TT1 }} />
+            </div>
+          ))}</h3>
+          <h2 style={{color:"#003F7D"}}>   {data.map((item, index) => (
+            <div key={index}>
+              <div dangerouslySetInnerHTML={{ __html: item.ND1 }} />
+            </div>
+          ))}</h2>
           <div className="line"></div>
           <br />
           <div className="blue-line">
-            <p >
-              Công ty Cổ phần Dịch vụ Du lịch Phú Thọ (Phuthotourist), là một đơn vị thành viên của
-              Saigontourist. Phuthotourist được biết đến với các sản phẩm du lịch nổi tiếng tại TP.HCM
-              (Quận 11) như:
-            </p>
-            <ul>
-              <li>Công viên Văn hóa Đầm Sen</li>
-              <li>Khu du lịch sinh thái Vàm Sát</li>
-              <li>Khách sạn Ngọc Lan</li>
-              <li>Khách sạn Phú Thọ</li>
-              <li>Trung tâm chăm sóc sức khỏe & giải trí Đầm Sen (Damsen Plaza)</li>
-              <li>Nhà hàng Thủy Tạ Đầm Sen</li>
-              <li>Cà phê Vườn Đá</li>
-              <li>Trung tâm Dịch vụ Du lịch Đầm Sen (Damsen Travel)</li>
-              <li>Liên kết với Công viên nước Đầm Sen (Đầm Sen Water Park).</li>
-            </ul>
+          {data.map((item, index) => (
+            <div key={index}>
+              <div dangerouslySetInnerHTML={{ __html: item.ND2 }} />
+            </div>
+          ))}
           </div>
           <br />
           <button className="button">Xem chi tiết</button>
@@ -213,16 +247,28 @@ function TrangchuPages() {
         <img src={logo5}  className='logo5'/> 
         <div style={{marginTop:"-230px"}}>
         <div className="header" >
-          <p>CHIA SẺ THÔNG TIN</p>
-          <h2>Bài viết mới</h2>
+          <p>    {data.map((item, index) => (
+            <div key={index}>
+              <div dangerouslySetInnerHTML={{ __html: item.TT2 }} />
+            </div>
+          ))}</p>
+          <h2>    {data.map((item, index) => (
+            <div key={index}>
+              <div dangerouslySetInnerHTML={{ __html: item.TT4 }} />
+            </div>
+          ))}</h2>
           <div className="line" style={{marginLeft:"450px",width:"250px"}}></div>
-          <p>Hãy cùng chúng tôi chia sẻ những bài viết mới với các thông tin về những sản phẩm du lịch</p>
+          <p>    {data.map((item, index) => (
+            <div key={index}>
+              <div dangerouslySetInnerHTML={{ __html: item.TT3 }} />
+            </div>
+          ))}</p>
         </div>
 
         <div className="content">
           {posts.map((post, index) => (
             <div key={index} className="post" style={{ backgroundColor: "white" }}>
-              <img src={post.image} alt={post.title} />
+              <img src={post.image} alt={typeof post.title === 'string' ? post.title : 'Bài viết'} />
               <div className="post-info">
                 <div className="author">
                   <span>{post.author}</span>

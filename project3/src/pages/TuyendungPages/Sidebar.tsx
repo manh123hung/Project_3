@@ -66,7 +66,7 @@ const Sidebar: React.FC = () => {
       <FontAwesomeIcon icon={faHome} /> Linh vực
       </h4>
       <div className="button-group">
-        <button className="button"  >Hướng dẫn viên</button>
+        <button className="button">Hướng dẫn viên</button>
         <button className="button">Kinh doanh</button>
         <button className="button">Kỹ sư xây dựng</button>
         <button className="button">Nhân viên kế toán</button>

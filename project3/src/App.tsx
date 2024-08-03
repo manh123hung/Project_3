@@ -9,7 +9,9 @@ import Footer from './component/Footer';
 import TrangchuPages from './pages/TrangchuPages/TrangchuPages';
 import TailieuPages from './pages/TaiLieuPages/TailieuPages';
 import TuyendungPages from './pages/TuyendungPages/TuyendungPages';
-import Chitiet from './pages/TuyendungPages/TuyendungPages-Chitiet';
+import TuyendungChitiet from './pages/TuyendungPages/TuyendungPages-Chitiet';
+import BaivietChitiet from './pages/BaivietPages/BaivietPages-chitiet';
+import BaivietPages from './pages/BaivietPages/BaivietPages';
 function App() {
   const [data, setData] = useState<DocumentData[]>([]);
 
@@ -38,7 +40,9 @@ function App() {
       <Route path="/" element={<TrangchuPages  />} />
       <Route path="/Tailieu" element={<TailieuPages  />} />
       <Route path="/Tuyendung" element={<TuyendungPages  />} />
-      <Route path="/Chitiet" element={<Chitiet  />} />
+      <Route path="/TuyendungChitiet" element={<TuyendungChitiet  />} />
+      <Route path="/BaivietChitiet" element={<BaivietChitiet />} />
+      <Route path="/BaivietPages" element={<BaivietPages />} />
 
 
       </Routes>

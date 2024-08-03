@@ -67,8 +67,8 @@ const Navbar = () => {
           </li>
           <li>
             <Link
-              to="/bai-viet"
-              style={location.pathname === '/bai-viet' ? { textDecoration: 'underline', color: '#99FFFF' } : {}}
+              to="/BaivietPages"
+              style={location.pathname === '/BaivietPages' ? { textDecoration: 'underline', color: '#99FFFF' } : {}}
             >
               BÀI VIẾT
             </Link>
