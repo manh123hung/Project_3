@@ -1,13 +1,13 @@
-import Slide from './slide';
-import Arrow from './Arrow';
-import Dots from './Dots';
-import './BaivietPages.css';
+import Slide from "./slide";
+import Arrow from "./Arrow";
+import Dots from "./Dots";
+import "./BaivietPages.css";
 
-import React, { useEffect, useState } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
-import { firestore, storage } from '../../lib/firebase';
-import { collection, DocumentData, getDocs } from 'firebase/firestore';
-import { ref, getDownloadURL } from 'firebase/storage';
+import React, { useEffect, useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
+import { firestore, storage } from "../../lib/firebase";
+import { collection, DocumentData, getDocs } from "firebase/firestore";
+import { ref, getDownloadURL } from "firebase/storage";
 
 const SlideShow: React.FC = () => {
   const [logo4, setlogo4] = useState("");
@@ -60,7 +60,9 @@ const SlideShow: React.FC = () => {
   }, [navigate]);
 
   const plusSlides = (n: number) => {
-    setActiveIndex((prevIndex) => (prevIndex + n + slidesData.length) % slidesData.length);
+    setActiveIndex(
+      (prevIndex) => (prevIndex + n + slidesData.length) % slidesData.length
+    );
   };
 
   const currentSlide = (index: number) => {
@@ -70,27 +72,27 @@ const SlideShow: React.FC = () => {
   const slidesData = [
     {
       src: logo4,
-      alt: 'Slide 1',
-      title: 'Title 1',
-      description: 'Description for slide 1',
+      alt: "Slide 1",
+      title: "Title 1",
+      description: "Description for slide 1",
     },
     {
       src: hinh1,
-      alt: 'Slide 2',
-      title: 'Title 2',
-      description: 'Description for slide 2',
+      alt: "Slide 2",
+      title: "Title 2",
+      description: "Description for slide 2",
     },
     {
       src: hinh2,
-      alt: 'Slide 3',
-      title: 'Title 3',
-      description: 'Description for slide 3',
+      alt: "Slide 3",
+      title: "Title 3",
+      description: "Description for slide 3",
     },
     {
       src: hinh3,
-      alt: 'Slide 4',
-      title: 'Title 4',
-      description: 'Description for slide 4',
+      alt: "Slide 4",
+      title: "Title 4",
+      description: "Description for slide 4",
     },
   ];
 
@@ -98,7 +100,12 @@ const SlideShow: React.FC = () => {
     <div className="main-content">
       <div style={{ height: "450px" }}>
         {slidesData.map((slide, index) => (
-          <Slide key={index} src={slide.src} alt={slide.alt} isActive={index === activeIndex} />
+          <Slide
+            key={index}
+            src={slide.src}
+            alt={slide.alt}
+            isActive={index === activeIndex}
+          />
         ))}
       </div>
       <div className="news-info">
@@ -109,7 +116,11 @@ const SlideShow: React.FC = () => {
         </div>
         <p>{slidesData[activeIndex].description}</p>
       </div>
-      <Dots totalSlides={slidesData.length} activeIndex={activeIndex} onClick={currentSlide} />
+      <Dots
+        totalSlides={slidesData.length}
+        activeIndex={activeIndex}
+        onClick={currentSlide}
+      />
     </div>
   );
 };

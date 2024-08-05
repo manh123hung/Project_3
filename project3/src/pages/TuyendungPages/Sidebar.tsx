@@ -1,12 +1,17 @@
 // Sidebar.tsx
-import './Sidebar.css';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHome, faMapMarkerAlt, faPhoneAlt, faSearch } from '@fortawesome/free-solid-svg-icons';
-import React, { useEffect, useState } from 'react';
-import { Link, NavLink, useLocation, useNavigate } from 'react-router-dom';
-import { firestore, storage } from '../../lib/firebase';
-import { collection, DocumentData, getDocs } from 'firebase/firestore';
-import { ref,uploadBytesResumable, getDownloadURL } from 'firebase/storage';
+import "./Sidebar.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faHome,
+  faMapMarkerAlt,
+  faPhoneAlt,
+  faSearch,
+} from "@fortawesome/free-solid-svg-icons";
+import React, { useEffect, useState } from "react";
+import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
+import { firestore, storage } from "../../lib/firebase";
+import { collection, DocumentData, getDocs } from "firebase/firestore";
+import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 const Sidebar: React.FC = () => {
   const [logo4, setlogo4] = useState("");
 
@@ -16,19 +21,18 @@ const Sidebar: React.FC = () => {
   const [data, setData] = useState<DocumentData[]>([]);
   const [file, setFile] = useState<File | null>(null);
   const [uploadProgress, setUploadProgress] = useState(0);
-  const [download, setDownload] = useState('');
+  const [download, setDownload] = useState("");
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.files && event.target.files[0]) {
       setFile(event.target.files[0]);
-    }};
+    }
+  };
 
   useEffect(() => {
     //lay anh
-    const logo4= ref(storage, "TrangchuPages/Frame 8 (1).png");
-    Promise.all([
-      getDownloadURL(logo4),
-    ])
+    const logo4 = ref(storage, "TrangchuPages/Frame 8 (1).png");
+    Promise.all([getDownloadURL(logo4)])
       .then((urls) => {
         setlogo4(urls[0]);
       })
@@ -54,16 +58,23 @@ const Sidebar: React.FC = () => {
   }, [navigate]);
   return (
     <div className="col-md-3 sidebar">
-          <div className="input-group-append">
-          <span className="input-group-text fc2"  style={{height:"40px",backgroundColor:"white",}}>
-            <FontAwesomeIcon icon={faSearch} />
-            <input type="text" className="form-control" placeholder="Tìm kiếm" style={{border:"none"}} />
-
-          </span>
-        </div>
+      <div className="input-group-append">
+        <span
+          className="input-group-text fc2"
+          style={{ height: "40px", backgroundColor: "white" }}
+        >
+          <FontAwesomeIcon icon={faSearch} />
+          <input
+            type="text"
+            className="form-control"
+            placeholder="Tìm kiếm"
+            style={{ border: "none" }}
+          />
+        </span>
+      </div>
 
       <h4>
-      <FontAwesomeIcon icon={faHome} /> Linh vực
+        <FontAwesomeIcon icon={faHome} /> Linh vực
       </h4>
       <div className="button-group">
         <button className="button">Hướng dẫn viên</button>
@@ -75,7 +86,7 @@ const Sidebar: React.FC = () => {
       </div>
 
       <h4>
-      <FontAwesomeIcon icon={faMapMarkerAlt} /> Hình thức làm việc
+        <FontAwesomeIcon icon={faMapMarkerAlt} /> Hình thức làm việc
       </h4>
       <div className="button-group">
         <button className="button">Bán thời gian</button>
@@ -85,7 +96,7 @@ const Sidebar: React.FC = () => {
       </div>
 
       <h4>
-      <FontAwesomeIcon icon={faPhoneAlt} /> Nơi làm việc
+        <FontAwesomeIcon icon={faPhoneAlt} /> Nơi làm việc
       </h4>
       <div className="button-group">
         <button className="button">Cà phê Vườn Đá</button>
@@ -97,8 +108,7 @@ const Sidebar: React.FC = () => {
         <button className="button">Trung tâm DVĐL Đầm Sen</button>
         <button className="button">VP PhuThoTourist</button>
       </div>
-      <img src={logo4}  className='logo4'/> 
-
+      <img src={logo4} className="logo4" />
     </div>
   );
 };

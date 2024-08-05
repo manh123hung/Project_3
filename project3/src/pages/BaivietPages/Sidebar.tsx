@@ -1,9 +1,9 @@
-import './BaivietPages.css';
-import React, { useEffect, useState } from 'react';
-import { Link, NavLink, useLocation, useNavigate } from 'react-router-dom';
-import { firestore, storage} from '../../lib/firebase';
-import { collection, DocumentData, getDocs } from 'firebase/firestore';
-import { ref,uploadBytesResumable, getDownloadURL } from 'firebase/storage';
+import "./BaivietPages.css";
+import React, { useEffect, useState } from "react";
+import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
+import { firestore, storage } from "../../lib/firebase";
+import { collection, DocumentData, getDocs } from "firebase/firestore";
+import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 
 interface NewsItem {
   thumbnail: string;
@@ -11,8 +11,6 @@ interface NewsItem {
   views: string;
   date: string;
 }
-
-
 
 const Sidebar: React.FC = () => {
   const [logo4, setlogo4] = useState("");
@@ -25,7 +23,7 @@ const Sidebar: React.FC = () => {
   const [data, setData] = useState<DocumentData[]>([]);
   const [file, setFile] = useState<File | null>(null);
   const [uploadProgress, setUploadProgress] = useState(0);
-  const [download, setDownload] = useState('');
+  const [download, setDownload] = useState("");
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.files && event.target.files[0]) {
@@ -77,21 +75,52 @@ const Sidebar: React.FC = () => {
     fetchData();
   }, [navigate]);
   const newsItems: NewsItem[] = [
-    { thumbnail: logo4, title: 'Thông báo đấu giá giữ xe tại CVVH Đầm Sen', views: '10k views', date: '20/02/2022' },
-    { thumbnail: hinh1, title: 'Thông báo đấu giá giữ xe tại CVVH Đầm Sen', views: '10k views', date: '20/02/2022' },
-    { thumbnail: hinh2, title: 'Thông báo đấu giá giữ xe tại CVVH Đầm Sen', views: '10k views', date: '20/02/2022' },
-    { thumbnail: hinh3, title: 'Thông báo đấu giá giữ xe tại CVVH Đầm Sen', views: '10k views', date: '20/02/2022' },
-    { thumbnail: hinh4, title: 'Thông báo đấu giá giữ xe tại CVVH Đầm Sen', views: '10k views', date: '20/02/2022' },
+    {
+      thumbnail: logo4,
+      title: "Thông báo đấu giá giữ xe tại CVVH Đầm Sen",
+      views: "10k views",
+      date: "20/02/2022",
+    },
+    {
+      thumbnail: hinh1,
+      title: "Thông báo đấu giá giữ xe tại CVVH Đầm Sen",
+      views: "10k views",
+      date: "20/02/2022",
+    },
+    {
+      thumbnail: hinh2,
+      title: "Thông báo đấu giá giữ xe tại CVVH Đầm Sen",
+      views: "10k views",
+      date: "20/02/2022",
+    },
+    {
+      thumbnail: hinh3,
+      title: "Thông báo đấu giá giữ xe tại CVVH Đầm Sen",
+      views: "10k views",
+      date: "20/02/2022",
+    },
+    {
+      thumbnail: hinh4,
+      title: "Thông báo đấu giá giữ xe tại CVVH Đầm Sen",
+      views: "10k views",
+      date: "20/02/2022",
+    },
   ];
   return (
     <div className="sidebar">
-      <h4><b>Bài mới nhất</b></h4>
+      <h4>
+        <b>Bài mới nhất</b>
+      </h4>
       {newsItems.map((item, index) => (
         <div className="news-item" key={index}>
-          <img src={item.thumbnail}  alt="News Thumbnail" />
+          <img src={item.thumbnail} alt="News Thumbnail" />
           <div>
-            <h6><b> {item.title}</b></h6>
-            <p>{item.views} | {item.date}</p>
+            <h6>
+              <b> {item.title}</b>
+            </h6>
+            <p>
+              {item.views} | {item.date}
+            </p>
           </div>
         </div>
       ))}
