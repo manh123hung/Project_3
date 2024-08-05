@@ -11,6 +11,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleDoubleDown, faArrowDown, faArrowUp, faBell, faCalendarAlt, faChevronRight, faDownload, faHome, faLightbulb, faMapMarkerAlt, faNewspaper, faPhoneAlt, faSearch, faSortAlphaDown, faSortAlphaUp, faUserFriends } from '@fortawesome/free-solid-svg-icons';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
+import SlideShow from './SlideShow';
+import Sidebar from './Sidebar';
 
 function BaivietPages() {
 
@@ -191,6 +193,19 @@ function BaivietPages() {
     <h1 className="title">Bài Viết</h1>
   </div>
 </div>
+      <div className="row" style={{marginRight:"200px"}}>
+        <div className="col-md-8">
+          <SlideShow />
+        </div>
+        <div className="col-md-4">
+          <Sidebar />
+        </div>
+      </div>
+
+
+
+
+
 
 
 
