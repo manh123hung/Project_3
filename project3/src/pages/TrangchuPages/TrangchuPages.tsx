@@ -7,6 +7,9 @@ import { firestore, storage } from '../../lib/firebase';
 import Navbar from '../../component/Navbar';
 import Footer from '../../component/Footer';
 import './TrangchuPages.css';
+import ImageSlider from './ImageSlider';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faAngleDoubleDown } from '@fortawesome/free-solid-svg-icons';
 
 function TrangchuPages() {
   const [logo4, setLogo4] = useState('');
@@ -188,15 +191,19 @@ function TrangchuPages() {
       date: '10N lượt xem - 20/02/2022',
     },
   ];
+  const handleScrollDown = () => {
+    window.scrollTo({
+      top: document.body.scrollHeight,
+      behavior: 'smooth'
+    });
+  };
   return (
     <div>
       <Navbar />
-      <div style={{ position: 'relative', width: '100%', overflow: 'hidden' }}>
-        {/* Hiển thị video */}
+      <div style={{ position: 'relative', width: '100%', height: '100%', overflow: 'hidden' }}>
         {logo4 && (
           <video
-            width="100%"
-            height="auto"
+            style={{ position: 'absolute', width: '100%', height: '100%', objectFit: 'cover' }}
             loop
             autoPlay
             muted
@@ -205,7 +212,34 @@ function TrangchuPages() {
             Your browser does not support the video tag.
           </video>
         )}
+
+        <div className="container c012" style={{ marginLeft: "390px", fontFamily: "Roboto",padding:"10px" }}>
+          <div className="container-fluid">
+            <div className="row">
+              <div className="text-center" style={{ marginLeft: "-270px" }}>
+                <h3 className="title2">CÔNG TY CỔ PHẦN DỊCH VỤ DU LỊCH PHÚ THỌ</h3>
+                <h1 className="title3">PHUTHOTOURIST</h1>
+                <h5 className="title2">Ngày thành lập 01/01/2019</h5>
+
+              </div>
+            </div>
+            <div className='row' style={{marginRight:"550px"}}>
+            <ImageSlider />
+            </div>
+            <div className="row" style={{ marginRight: "560px",padding:"10px" }}>
+              <FontAwesomeIcon
+                icon={faAngleDoubleDown}
+                color="white"
+                style={{ fontSize: "40px" }}
+                onClick={handleScrollDown}
+              />
+            </div>
+            <br />
+          </div>
+        </div>
       </div>
+   
+
       <div className='container'>
       <div className="container1">
         <div className="left-content">
@@ -294,6 +328,7 @@ function TrangchuPages() {
         </div>
       </div>
     </div>
+
       <h4 className="text-center" style={{lineHeight:"53.2px",fontFamily:"Philosopher"}}> <b> <div>
           {data.map((item, index) => (
             <div key={index}>

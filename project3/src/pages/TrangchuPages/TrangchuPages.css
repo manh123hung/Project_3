@@ -270,3 +270,55 @@ height: 120px;
   margin-top: -20px;
   opacity: 0.1;
 }
+/* src/App.css */
+.image-card {
+  position: relative;
+  margin: 0;
+  padding: 0;
+  cursor: pointer; /* Add pointer cursor to indicate clickable images */
+}
+
+.image-card img {
+  width: 100%;
+  height: 300px; /* Set a fixed height for all images */
+  object-fit: cover; /* Ensure the image covers the area without distortion */
+  display: block;
+}
+
+.lean-right {
+  transform: perspective(800px) rotateY(25deg);
+  margin-right: -20px; /* Increase negative margin to overlap more with central image */
+}
+
+.lean-left {
+  transform: perspective(800px) rotateY(-25deg);
+  margin-left: -20px; /* Increase negative margin to overlap more with central image */
+}
+
+.central-image img {
+  margin-top: -10px; /* Adjust as needed to overlap central image */
+}
+
+.overlay-text {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  color: white;
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 5px;
+  border-radius: 3px;
+}
+.col-md-2, .col-md-4 {
+  padding-left: 0;
+  padding-right: 0;
+}
+.title2{
+  color: white;
+  font-family: "Philosopher";
+  
+}
+.title3{
+  color: #99FFFF;
+  font-family: "Philosopher";
+  
+}
