@@ -8,6 +8,7 @@ import Navbar from "../../component/Navbar";
 import Footer from "../../component/Footer";
 import "./BaivietPages.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import logo1 from "../../asset/Frame 8 (1).png"
 import {
   faAngleDoubleDown,
   faArrowDown,
@@ -24,36 +25,83 @@ import {
   faSearch,
   faSortAlphaDown,
   faSortAlphaUp,
+  faTimes,
   faUserFriends,
 } from "@fortawesome/free-solid-svg-icons";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min";
 import SlideShow from "./SlideShow";
 import Sidebar from "./Sidebar";
+import ArticleRow from "./ArticleRow";
 
 function BaivietPages() {
   const [logo4, setLogo4] = useState("");
-  const [hinh1, sethinh1] = useState("");
-  const [hinh2, sethinh2] = useState("");
-  const [hinh3, sethinh3] = useState("");
-  const [hinh4, sethinh4] = useState("");
-  const [hinh5, sethinh5] = useState("");
-  const [hinh6, sethinh6] = useState("");
-  const [hinh7, sethinh7] = useState("");
-  const [hinh8, sethinh8] = useState("");
-  const [hinh9, sethinh9] = useState("");
-  const [hinh10, sethinh10] = useState("");
-  const [hinh11, sethinh11] = useState("");
-  const [hinh12, sethinh12] = useState("");
+  const [images, setImages] = useState<string[]>([]);
   const [logo6, setLogo6] = useState("");
-
-  const [uploadProgress, setUploadProgress] = useState(0);
-  const [download, setDownload] = useState("");
   const [data, setData] = useState<DocumentData[]>([]);
   const [file, setFile] = useState<File | null>(null);
+  const [uploadProgress, setUploadProgress] = useState(0);
+  const [download, setDownload] = useState("");
 
-  const location = useLocation();
-  const navigate = useNavigate();
+  useEffect(() => {
+    const fetchImages = async () => {
+      const imageRefs = [
+        "BaivietPages/img (15).png",
+        "BaivietPages/img (16).png",
+        "BaivietPages/img (17).png",
+        "BaivietPages/img (18).png",
+        "BaivietPages/img (19).png",
+        "BaivietPages/img (20).png",
+        "BaivietPages/img (21).png",
+        "BaivietPages/img (22).png",
+        "BaivietPages/img (23).png",
+        "BaivietPages/img (24).png",
+        "BaivietPages/img (25).png",
+        "BaivietPages/img (26).png",
+      ];
+      try {
+        const urls = await Promise.all(
+          imageRefs.map(async (path) => {
+            const storageRef = ref(storage, path);
+            return getDownloadURL(storageRef);
+          })
+        );
+
+        setImages(urls);
+        setLogo6("TrangchuPages/Frame 8 (1).png");
+
+      } catch (error) {
+        console.log("Error fetching image URLs:", error);
+      }
+    };
+
+    const fetchVideo = async () => {
+      const logo4Ref = ref(storage, "TrangchuPages/-b581-45d9-98eb-64676259fd20.mp4");
+      try {
+        const url = await getDownloadURL(logo4Ref);
+        setLogo4(url);
+      } catch (error) {
+        console.log("Error fetching video URL:", error);
+      }
+    };
+
+    const fetchData = async () => {
+      try {
+        const quanlyRef = await getDocs(collection(firestore, "Articles"));
+        const fetchedData: DocumentData[] = [];
+        quanlyRef.forEach((doc) => {
+          fetchedData.push(doc.data());
+        });
+        setData(fetchedData);
+      } catch (error) {
+        console.log("Error fetching data:", error);
+      }
+    };
+
+    fetchImages();
+    fetchVideo();
+    fetchData();
+  }, []);
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.files && event.target.files[0]) {
@@ -61,113 +109,17 @@ function BaivietPages() {
     }
   };
 
-  useEffect(() => {
-    // Lấy ảnh từ Firebase Storage
-    const hinh1Ref = ref(storage, "BaivietPages/img (15).png");
-    const hinh2Ref = ref(storage, "BaivietPages/img (16).png");
-    const hinh3Ref = ref(storage, "BaivietPages/img (17).png");
-    const hinh4Ref = ref(storage, "BaivietPages/img (18).png");
-    const hinh5Ref = ref(storage, "BaivietPages/img (19).png");
-    const hinh6Ref = ref(storage, "BaivietPages/img (20).png");
-    const hinh7Ref = ref(storage, "BaivietPages/img (21).png");
-    const hinh8Ref = ref(storage, "BaivietPages/img (22).png");
-    const hinh9Ref = ref(storage, "BaivietPages/img (23).png");
-    const hinh10Ref = ref(storage, "BaivietPages/img (24).png");
-    const hinh11Ref = ref(storage, "BaivietPages/img (25).png");
-    const hinh12Ref = ref(storage, "BaivietPages/img (26).png");
-    const logo6Ref = ref(storage, "TrangchuPages/Frame 8 (1).png");
-
-    Promise.all([
-      getDownloadURL(hinh1Ref),
-      getDownloadURL(hinh2Ref),
-      getDownloadURL(hinh3Ref),
-      getDownloadURL(hinh4Ref),
-      getDownloadURL(hinh5Ref),
-      getDownloadURL(hinh6Ref),
-      getDownloadURL(hinh7Ref),
-      getDownloadURL(hinh8Ref),
-      getDownloadURL(hinh9Ref),
-      getDownloadURL(hinh10Ref),
-      getDownloadURL(hinh11Ref),
-      getDownloadURL(hinh12Ref),
-      getDownloadURL(logo6Ref),
-    ])
-      .then((urls) => {
-        sethinh1(urls[0]);
-        sethinh2(urls[1]);
-        sethinh3(urls[2]);
-        sethinh4(urls[3]);
-        sethinh5(urls[4]);
-        sethinh6(urls[5]);
-        sethinh7(urls[6]);
-        sethinh8(urls[7]);
-        sethinh9(urls[8]);
-        sethinh10(urls[9]);
-        sethinh11(urls[10]);
-        sethinh12(urls[11]);
-        setLogo6(urls[12]);
-      })
-      .catch((error) => {
-        console.log("Error getting URLs:", error);
-      });
-
-    // Lấy video từ Firebase Storage
-    const logo4Ref = ref(
-      storage,
-      "TrangchuPages/-b581-45d9-98eb-64676259fd20.mp4"
-    ); // Thay thế bằng đường dẫn đến video của bạn
-
-    getDownloadURL(logo4Ref)
-      .then((url) => {
-        setLogo4(url);
-      })
-      .catch((error) => {
-        console.log("Error getting video URL:", error);
-      });
-
-    // Lấy dữ liệu từ Firestore
-    const fetchData = async () => {
-      try {
-        const quanlyRef = await getDocs(collection(firestore, "TrangchuPages"));
-        const fetchedData: DocumentData[] = [];
-
-        quanlyRef.forEach((doc) => {
-          fetchedData.push(doc.data());
-        });
-
-        setData(fetchedData);
-      } catch (error) {
-        console.log("Error fetching data:", error);
-      }
-    };
-
-    fetchData();
-  }, [navigate]);
-  const [currentDate, setCurrentDate] = useState("");
-
-  useEffect(() => {
-    const today = new Date();
-    const year = today.getFullYear();
-    const month = String(today.getMonth() + 1).padStart(2, "0"); // Tháng bắt đầu từ 0
-    const day = String(today.getDate()).padStart(2, "0");
-    setCurrentDate(`${year}-${month}-${day}`);
-  }, []);
-  // Xử lý tải lên video
   const handleUpload = () => {
     if (!file) return;
 
-    const storageRef = ref(
-      storage,
-      `TrangchuPages/-b581-45d9-98eb-64676259fd20.mp4`
-    ); // Thay thế bằng đường dẫn đến thư mục lưu trữ video của bạn
+    const storageRef = ref(storage, `TrangchuPages/-b581-45d9-98eb-64676259fd20.mp4`);
 
     const uploadTask = uploadBytesResumable(storageRef, file);
 
     uploadTask.on(
       "state_changed",
       (snapshot) => {
-        const progress =
-          (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+        const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
         setUploadProgress(progress);
       },
       (error) => {
@@ -182,6 +134,56 @@ function BaivietPages() {
     );
   };
 
+  const articles = data.map((item, index) => ({
+    hinh: images[index],
+    title: item.title,
+    date: item.date,
+    views: item.views,
+    tags: Array.isArray(item.tags) ? item.tags : []  // Đảm bảo rằng tags là một mảng
+  }));
+  const [currentDate, setCurrentDate] = useState("");
+
+  useEffect(() => {
+    const today = new Date();
+    const year = today.getFullYear();
+    const month = String(today.getMonth() + 1).padStart(2, "0"); // Tháng bắt đầu từ 0
+    const day = String(today.getDate()).padStart(2, "0");
+    setCurrentDate(`${year}-${month}-${day}`);
+  }, []);
+  const [isSuggestionsVisible, setSuggestionsVisible] = useState(false);
+  const [searchText, setSearchText] = useState("");
+  const [recentSearches, setRecentSearches] = useState([
+    "Công Viên Văn Hóa Đầm Sen",
+    "KDLST Vàm Sát",
+    "Công Viên Văn Hóa Đầm Sen",
+    "Công Viên Văn Hóa Đầm Sen",
+  ]);
+
+  const searchSuggestions = [
+    "Nhân viên phục vụ",
+    "Nhân viên bảo vệ",
+    "Nhân viên thiết kế",
+    "Nhân viên bảo trì",
+    "Nhân viên trợ lý",
+  ];
+
+  const handleSearchClick = () => {
+    setSuggestionsVisible(true);
+  };
+
+  const handleBlur = () => {
+    setTimeout(() => setSuggestionsVisible(false), 200); // Delay để đảm bảo người dùng có thể chọn mục gợi ý trước khi danh sách bị ẩn
+  };
+
+  const handleRemoveRecentSearch = (index: number) => {
+    const updatedSearches = recentSearches.filter((_, i) => i !== index);
+    setRecentSearches(updatedSearches);
+  };
+
+  const handleSuggestionClick = (suggestion: string) => {
+    setSearchText(suggestion);
+    setSuggestionsVisible(false);
+  };
   return (
     <div>
       <Navbar />
@@ -270,7 +272,7 @@ function BaivietPages() {
                 </Link>
               </li>
             </ul>
-            <img src={logo6} className="logo7" />
+            <img src={logo1} alt="" className="logo7"  />
           </div>
           <div className="col-md-9">
             <div className="row mb-3">
@@ -290,12 +292,48 @@ function BaivietPages() {
                       </span>
                     </div>
                     <input
-                      type="text"
-                      className="form-control"
-                      id="keyword"
-                      placeholder="Tìm kiếm"
-                      style={{ border: "none" }}
+            type="text"
+            className="form-control"
+            placeholder="Tìm kiếm"
+            style={{ border: "none" }}
+            value={searchText}
+            onClick={handleSearchClick}
+            onChange={(e) => setSearchText(e.target.value)}
+            onBlur={handleBlur}
+          />
+
+
+{isSuggestionsVisible && (
+        <div className="suggestions">
+          {searchText === "" ? (
+            <div className="recent-searches">
+              <strong>Tìm kiếm gần đây:</strong>
+              <ul>
+                {recentSearches.map((item, index) => (
+                  <li key={index}>
+                    {item}
+                    <FontAwesomeIcon
+                      icon={faTimes}
+                      className="close-icon"
+                      onClick={() => handleRemoveRecentSearch(index)}
                     />
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ) : (
+            <div className="search-suggestions">
+              <ul style={{ listStyleType: "none" }}>
+                {searchSuggestions.map((item, index) => (
+                  <li key={index} onClick={() => handleSuggestionClick(item)}>
+                    <FontAwesomeIcon icon={faSearch} className="search-icon" />{item}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+        </div>
+      )}
                   </div>
                 </div>
               </div>
@@ -349,313 +387,20 @@ function BaivietPages() {
                 </div>
               </div>
             </div>
-            <div className="row">
-              <div className="col-md-3">
-                <div className="article-container">
-                  <div className="article-preview">
-                    <img src={hinh1} alt="..." />
-                    <div className="article-content">
-                      <h5 className="article-title">
-                        Thông báo: đấu giá giữ xe tại CVHH Đầm Sen
-                      </h5>
-                      <div className="author">
-                        <span>Admin</span>
-                        <span className="dot"></span>
-                      </div>
-                      <p className="article-description">
-                        <span className="item-button">Sự kiện</span>
-                        <span className="item-button">Thông báo</span>
-                        <span className="item-button">Tin tức</span>
-                      </p>
-                      <p className="article-meta">10N lượt xem - 20/02/2022</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="col-md-3">
-                <div className="article-container">
-                  <div className="article-preview">
-                    <img src={hinh2} alt="..." />
-                    <div className="article-content">
-                      <h5 className="article-title">
-                        Thông báo: đấu giá giữ xe tại CVHH Đầm Sen
-                      </h5>
-                      <div className="author">
-                        <span>Admin</span>
-                        <span className="dot"></span>
-                      </div>
-                      <p className="article-description">
-                        <span className="item-button">Sự kiện</span>
-                        <span className="item-button">Thông báo</span>
-                        <span className="item-button">Tin tức</span>
-                      </p>
-                      <p className="article-meta">10N lượt xem - 20/02/2022</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="col-md-3">
-                <div className="article-container">
-                  <div className="article-preview">
-                    <img src={hinh3} alt="..." />
-                    <div className="article-content">
-                      <h5 className="article-title">
-                        Thông báo: đấu giá giữ xe tại CVHH Đầm Sen
-                      </h5>
-                      <div className="author">
-                        <span>Admin</span>
-                        <span className="dot"></span>
-                      </div>
-                      <p className="article-description">
-                        <span className="item-button">Sự kiện</span>
-                        <span className="item-button">Thông báo</span>
-                        <span className="item-button">Tin tức</span>
-                      </p>
-                      <p className="article-meta">10N lượt xem - 20/02/2022</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="col-md-3">
-                <div className="article-container">
-                  <div className="article-preview">
-                    <img src={hinh4} alt="..." />
-                    <div className="article-content">
-                      <h5 className="article-title">
-                        Thông báo: đấu giá giữ xe tại CVHH Đầm Sen
-                      </h5>
-                      <div className="author">
-                        <span>Admin</span>
-                        <span className="dot"></span>
-                      </div>
-                      <p className="article-description">
-                        <span className="item-button">Sự kiện</span>
-                        <span className="item-button">Thông báo</span>
-                        <span className="item-button">Tin tức</span>
-                      </p>
-                      <p className="article-meta">10N lượt xem - 20/02/2022</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="row">
-              <div className="col-md-3">
-                <div className="article-container">
-                  <div className="article-preview">
-                    <img src={hinh5} alt="..." />
-                    <div className="article-content">
-                      <h5 className="article-title">
-                        Gazillion Bubble Show của Fan Yang tại Đầm Sen
-                      </h5>
-                      <div className="author">
-                        <span>Admin</span>
-                        <span className="dot"></span>
-                      </div>
-                      <p className="article-description">
-                        <span className="item-button">Sự kiện</span>
-                        <span className="item-button">Thông báo</span>
-                        <span className="item-button">Tin tức</span>
-                      </p>
-                      <p className="article-meta">10N lượt xem - 20/02/2022</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="col-md-3">
-                <div className="article-container">
-                  <div className="article-preview">
-                    <img src={hinh6} alt="..." />
-                    <div className="article-content">
-                      <h5 className="article-title">
-                        Thông báo: đấu giá giữ xe tại CVHH Đầm Sen
-                      </h5>
-                      <div className="author">
-                        <span>Admin</span>
-                        <span className="dot"></span>
-                      </div>
-                      <p className="article-description">
-                        <span className="item-button">Sự kiện</span>
-                        <span className="item-button">Thông báo</span>
-                        <span className="item-button">Tin tức</span>
-                      </p>
-                      <p className="article-meta">10N lượt xem - 20/02/2022</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="col-md-3">
-                <div className="article-container">
-                  <div className="article-preview">
-                    <img src={hinh7} alt="..." />
-                    <div className="article-content">
-                      <h5 className="article-title">
-                        Thông báo: đấu giá giữ xe tại CVHH Đầm Sen
-                      </h5>
-                      <div className="author">
-                        <span>Admin</span>
-                        <span className="dot"></span>
-                      </div>
-                      <p className="article-description">
-                        <span className="item-button">Sự kiện</span>
-                        <span className="item-button">Thông báo</span>
-                        <span className="item-button">Tin tức</span>
-                      </p>
-                      <p className="article-meta">10N lượt xem - 20/02/2022</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="col-md-3">
-                <div className="article-container">
-                  <div className="article-preview">
-                    <img src={hinh8} alt="..." />
-                    <div className="article-content">
-                      <h5 className="article-title">
-                        Thông báo: đấu giá giữ xe tại CVHH Đầm Sen
-                      </h5>
-                      <div className="author">
-                        <span>Admin</span>
-                        <span className="dot"></span>
-                      </div>
-                      <p className="article-description">
-                        <span className="item-button">Sự kiện</span>
-                        <span className="item-button">Thông báo</span>
-                        <span className="item-button">Tin tức</span>
-                      </p>
-                      <p className="article-meta">10N lượt xem - 20/02/2022</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="row">
-              <div className="col-md-3">
-                <div className="article-container">
-                  <div className="article-preview">
-                    <img src={hinh9} alt="..." />
-                    <div className="article-content">
-                      <h5 className="article-title">
-                        Liên hoan ẩm thực Đất phương Nam 2019
-                      </h5>
-                      <div className="author">
-                        <span>Admin</span>
-                        <span className="dot"></span>
-                      </div>
-                      <p className="article-description">
-                        <span className="item-button">Sự kiện</span>
-                        <span className="item-button">Thông báo</span>
-                        <span className="item-button">Tin tức</span>
-                      </p>
-                      <p className="article-meta">10N lượt xem - 20/02/2022</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="col-md-3">
-                <div className="article-container">
-                  <div className="article-preview">
-                    <img src={hinh10} alt="..." />
-                    <div className="article-content">
-                      <h5 className="article-title">
-                        Liên hoan ẩm thực Đất phương Nam 2019
-                      </h5>
-                      <div className="author">
-                        <span>Admin</span>
-                        <span className="dot"></span>
-                      </div>
-                      <p className="article-description">
-                        <span className="item-button">Sự kiện</span>
-                        <span className="item-button">Thông báo</span>
-                        <span className="item-button">Tin tức</span>
-                      </p>
-                      <p className="article-meta">10N lượt xem - 20/02/2022</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="col-md-3">
-                <div className="article-container">
-                  <div className="article-preview">
-                    <img src={hinh11} alt="..." />
-                    <div className="article-content">
-                      <h5 className="article-title">
-                        Liên hoan ẩm thực Đất phương Nam 2019
-                      </h5>
-                      <div className="author">
-                        <span>Admin</span>
-                        <span className="dot"></span>
-                      </div>
-                      <p className="article-description">
-                        <span className="item-button">Sự kiện</span>
-                        <span className="item-button">Thông báo</span>
-                        <span className="item-button">Tin tức</span>
-                      </p>
-                      <p className="article-meta">10N lượt xem - 20/02/2022</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="col-md-3">
-                <div className="article-container">
-                  <div className="article-preview">
-                    <img src={hinh12} alt="..." />
-                    <div className="article-content">
-                      <h5 className="article-title">
-                        Liên hoan ẩm thực Đất phương Nam 2019
-                      </h5>
-                      <div className="author">
-                        <span>Admin</span>
-                        <span className="dot"></span>
-                      </div>
-                      <p className="article-description">
-                        <span className="item-button">Sự kiện</span>
-                        <span className="item-button">Thông báo</span>
-                        <span className="item-button">Tin tức</span>
-                      </p>
-                      <p className="article-meta">10N lượt xem - 20/02/2022</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <nav aria-label="Page navigation example">
-              <ul className="pagination justify-content-center">
-                <li className="page-item disabled">
-                  <a className="page-link" href="#" aria-label="Previous">
-                    <span aria-hidden="true">&laquo;</span>
-                  </a>
-                </li>
-                <li className="page-item active">
-                  <a className="page-link" href="#">
-                    1
-                  </a>
-                </li>
-                <li className="page-item">
-                  <a className="page-link" href="#">
-                    2
-                  </a>
-                </li>
-                <li className="page-item">
-                  <a className="page-link" href="#">
-                    3
-                  </a>
-                </li>
-                <li className="page-item">
-                  <span className="page-link">...</span>
-                </li>
-                <li className="page-item">
-                  <a className="page-link" href="#">
-                    10
-                  </a>
-                </li>
-                <li className="page-item">
-                  <a className="page-link" href="#" aria-label="Next">
-                    <span aria-hidden="true">&raquo;</span>
-                  </a>
-                </li>
-              </ul>
-            </nav>
+            <div>
+      <ArticleRow articles={articles.slice(0, 4)} />
+      <ArticleRow articles={articles.slice(4, 8)} />
+      <ArticleRow articles={articles.slice(8, 12)} />
+    </div>
+    <div className="pagination-container" style={{width:"280px",marginLeft:"430px"}}>
+      <button className="pagination-arrow" disabled>&lt;</button>
+      <button className="pagination-page active">1</button>
+      <button className="pagination-page">2</button>
+      <button className="pagination-page">3</button>
+      <span className="pagination-dots">...</span>
+      <button className="pagination-page">10</button>
+      <button className="pagination-arrow">&gt;</button>
+    </div>
           </div>
         </div>
       </div>

@@ -342,7 +342,6 @@ function TrangchuPages() {
                 style={{ marginLeft: "450px", width: "250px" }}
               ></div>
               <p>
-                {" "}
                 {data.map((item, index) => (
                   <div key={index}>
                     <div dangerouslySetInnerHTML={{ __html: item.TT3 }} />
@@ -350,32 +349,33 @@ function TrangchuPages() {
                 ))}
               </p>
             </div>
-
-            <div className="content">
+                <div style={{ marginLeft: "80px"}}>
+                <Link to="/BaivietChitiet" style={{textDecoration:"none"}}>
+                <div className="content">
               {posts.map((post, index) => (
-                <div
-                  key={index}
-                  className="post"
-                  style={{ backgroundColor: "white" }}
-                >
+                <div key={index} className="post" style={{ backgroundColor: "white" }}>
                   <img
                     src={post.image}
-                    alt={
-                      typeof post.title === "string" ? post.title : "Bài viết"
-                    }
+                    alt={typeof post.title === "string" ? post.title : "Bài viết"}
                   />
+                  <div className="overlay"></div>
+                  <div className="click-to-view">Click để xem</div>
                   <div className="post-info">
                     <div className="author">
                       <span>{post.author}</span>
                       <span className="dot"></span>
                     </div>
-                    <h3>
-                      <b>{post.title}</b>
-                    </h3>
+                    <h4>
+                      <b>
+                        <Link to="BaivietChitiet">{post.title}</Link>
+                      </b>
+                    </h4>
                     <p>{post.content}</p>
                     <div className="tags">
                       {post.tags.map((tag, tagIndex) => (
-                        <span key={tagIndex}>{tag}</span>
+                        <b key={tagIndex}>
+                          <span>{tag}</span>
+                        </b>
                       ))}
                     </div>
                     <div className="date">
@@ -384,9 +384,11 @@ function TrangchuPages() {
                   </div>
                 </div>
               ))}
+             </div>
+             </Link>
             </div>
             <div className="button1">
-              <button>Xem thêm bài viết</button>
+             <Link to="/BaivietChitiet"> <button >Xem thêm bài viết</button> </Link>
             </div>
           </div>
         </div>
@@ -396,9 +398,7 @@ function TrangchuPages() {
         className="text-center"
         style={{ lineHeight: "53.2px", fontFamily: "Philosopher" }}
       >
-        {" "}
         <b>
-          {" "}
           <div>
             {data.map((item, index) => (
               <div key={index}>
@@ -416,7 +416,6 @@ function TrangchuPages() {
           fontFamily: "Philosopher",
         }}
       >
-        {" "}
         <b>
           {" "}
           <div>
@@ -441,7 +440,6 @@ function TrangchuPages() {
           fontFamily: "Philosopher",
         }}
       >
-        {" "}
         <div>
           {data.map((item, index) => (
             <div key={index}>
@@ -457,7 +455,7 @@ function TrangchuPages() {
             <img src={hinh3} alt="Trò Chơi" />
             <div className="wt">
               <h4 style={{ color: "#0054A6", lineHeight: "42.56px" }}>
-                {" "}
+                
                 <b>
                   <div>
                     {data.map((item, index) => (
@@ -481,7 +479,6 @@ function TrangchuPages() {
             <img src={hinh4} alt="Trò Chơi" />
             <div className="wt">
               <h4 style={{ color: "#0054A6", lineHeight: "42.56px" }}>
-                {" "}
                 <b>
                   <div>
                     {data.map((item, index) => (
@@ -506,7 +503,6 @@ function TrangchuPages() {
             <div className="wt">
               <h4 style={{ color: "#0054A6", lineHeight: "42.56px" }}>
                 <b>
-                  {" "}
                   <div>
                     {data.map((item, index) => (
                       <div key={index}>

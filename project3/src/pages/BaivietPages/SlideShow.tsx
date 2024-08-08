@@ -1,62 +1,61 @@
-import Slide from "./slide";
-import Arrow from "./Arrow";
-import Dots from "./Dots";
-import "./BaivietPages.css";
-
 import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { firestore, storage } from "../../lib/firebase";
 import { collection, DocumentData, getDocs } from "firebase/firestore";
 import { ref, getDownloadURL } from "firebase/storage";
+import Slide from "./slide";
+import Arrow from "./Arrow";
+import Dots from "./Dots";
+import "./BaivietPages.css";
+import h1 from "../../asset/01.png";
 
 const SlideShow: React.FC = () => {
-  const [logo4, setlogo4] = useState("");
-  const [hinh1, sethinh1] = useState("");
-  const [hinh2, sethinh2] = useState("");
-  const [hinh3, sethinh3] = useState("");
+  const [slidesData, setSlidesData] = useState<DocumentData[]>([]);
   const location = useLocation();
   const navigate = useNavigate();
-  const [data, setData] = useState<DocumentData[]>([]);
   const [activeIndex, setActiveIndex] = useState(0);
+  const [loading, setLoading] = useState(true); // New state for loading
 
   useEffect(() => {
-    const logo4Ref = ref(storage, "BaivietPages/Rectangle 3.png");
-    const hinh1Ref = ref(storage, "BaivietPages/img (20).png");
-    const hinh2Ref = ref(storage, "BaivietPages/img (13).png");
-    const hinh3Ref = ref(storage, "BaivietPages/img (14).png");
-
-    Promise.all([
-      getDownloadURL(logo4Ref),
-      getDownloadURL(hinh1Ref),
-      getDownloadURL(hinh2Ref),
-      getDownloadURL(hinh3Ref),
-    ])
-      .then((urls) => {
-        setlogo4(urls[0]);
-        sethinh1(urls[1]);
-        sethinh2(urls[2]);
-        sethinh3(urls[3]);
-      })
-      .catch((error) => {
-        console.log("Error getting URLs:", error);
-      });
-
-    const fetchData = async () => {
+    const fetchImages = async () => {
       try {
-        const quanlyRef = await getDocs(collection(firestore, "WS"));
-        const fetchedData: DocumentData[] = [];
-
-        quanlyRef.forEach((doc) => {
-          fetchedData.push(doc.data());
-        });
-
-        setData(fetchedData);
+        const images = ["BaivietPages/Rectangle 3.png", "BaivietPages/img (20).png", "BaivietPages/img (13).png", "BaivietPages/img (14).png"];
+        const imageRefs = images.map(image => ref(storage, image));
+        const urls = await Promise.all(imageRefs.map(imageRef => getDownloadURL(imageRef)));
+        return urls;
       } catch (error) {
-        console.log("Error fetching data:", error);
+        console.log("Error getting image URLs:", error);
+        return [];
       }
     };
 
-    fetchData();
+    const fetchSlidesData = async () => {
+      try {
+        const snapshot = await getDocs(collection(firestore, "slideshow"));
+        const fetchedData: DocumentData[] = [];
+
+        snapshot.forEach((doc) => {
+          fetchedData.push(doc.data());
+        });
+
+        const imageUrls = await fetchImages();
+        
+        const slidesWithData = fetchedData.map((data, index) => ({
+          src: imageUrls[index] || data.src,
+          alt: data.alt,
+          title: data.title,
+          description: data.description,
+        }));
+
+        setSlidesData(slidesWithData);
+        setLoading(false); // Set loading to false after data is fetched
+      } catch (error) {
+        console.log("Error fetching data:", error);
+        setLoading(false); // Set loading to false even if there is an error
+      }
+    };
+
+    fetchSlidesData();
   }, [navigate]);
 
   const plusSlides = (n: number) => {
@@ -69,32 +68,9 @@ const SlideShow: React.FC = () => {
     setActiveIndex(index);
   };
 
-  const slidesData = [
-    {
-      src: logo4,
-      alt: "Slide 1",
-      title: "Title 1",
-      description: "Description for slide 1",
-    },
-    {
-      src: hinh1,
-      alt: "Slide 2",
-      title: "Title 2",
-      description: "Description for slide 2",
-    },
-    {
-      src: hinh2,
-      alt: "Slide 3",
-      title: "Title 3",
-      description: "Description for slide 3",
-    },
-    {
-      src: hinh3,
-      alt: "Slide 4",
-      title: "Title 4",
-      description: "Description for slide 4",
-    },
-  ];
+  if (loading) {
+    return <div>Loading...</div>; // Show a loading message while data is being fetched
+  }
 
   return (
     <div className="main-content">
@@ -108,18 +84,23 @@ const SlideShow: React.FC = () => {
           />
         ))}
       </div>
-      <div className="news-info">
-        <div className="news-info-header">
-          <h3>{slidesData[activeIndex].title}</h3>
-          <Arrow direction="left" onClick={() => plusSlides(-1)} />
-          <Arrow direction="right" onClick={() => plusSlides(1)} />
+      {slidesData.length > 0 && (
+        <div className="news-info">
+          <div className="news-info-header">
+            <h3 style={{color:"#0054A6",fontSize:"27px",fontWeight:"bold"}}>  {slidesData[activeIndex].title}</h3>
+            <div style={{ textDecoration: "none" }}>
+              <Arrow direction="left" onClick={() => plusSlides(-1)} />
+              <Arrow direction="right" onClick={() => plusSlides(1)} />
+            </div>
+          </div>
+          <p>{slidesData[activeIndex].description}</p>
         </div>
-        <p>{slidesData[activeIndex].description}</p>
-      </div>
+      )}
       <Dots
         totalSlides={slidesData.length}
         activeIndex={activeIndex}
         onClick={currentSlide}
+        dotImageUrl={h1} // Sử dụng hình ảnh ngoài lề cho chấm được chọn
       />
     </div>
   );

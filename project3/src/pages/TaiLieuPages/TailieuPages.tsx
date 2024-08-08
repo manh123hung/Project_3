@@ -158,22 +158,22 @@ function TailieuPages() {
   const Card: React.FC<CardProps> = ({ title, text, imgSrc }) => {
     return (
       <div className="card1">
-        <div className="card-body">
-          <img src={imgSrc} alt={title} />
-          <img
-            src={logo5}
-            alt=""
-            style={{
-              height: "120px",
-              width: "100px",
-              marginLeft: "40px",
-              top: "50px",
-            }}
-          />
-          <h5 className="card-title">{title}</h5>
-          <p className="card-text">{text}</p>
-        </div>
+      <div className="card-body">
+        <img src={imgSrc} alt={title} />
+        <img
+          src={logo5}
+          alt=""
+          style={{
+            height: "120px",
+            width: "100px",
+            marginLeft: "40px",
+            top: "50px",
+          }}
+        />
+        <h5 className="card-title">{title}</h5>
+        <p className="card-text">{text}</p>
       </div>
+    </div>
     );
   };
 
@@ -207,11 +207,11 @@ function TailieuPages() {
 
         <div
           className="container c012"
-          style={{ marginLeft: "310px", fontFamily: "Roboto" }}
+          style={{ marginLeft: "330px", fontFamily: "Roboto" }}
         >
           <div className="container-fluid">
             <div className="row">
-              <div className="text-center" style={{ marginLeft: "-40px" }}>
+              <div className="text-center" style={{ marginLeft: "-70px" }}>
                 <h1 className="title">TÀI LIỆU</h1>
               </div>
             </div>
@@ -437,44 +437,16 @@ function TailieuPages() {
                 trong mỗi trang
               </p>
             </div>
-            <div className="col-4" style={{ marginLeft: "420px" }}>
-              <nav aria-label="Page navigation example">
-                <ul className="pagination justify-content-center">
-                  <li className="page-item disabled">
-                    <a className="page-link" href="#" aria-label="Previous">
-                      <span aria-hidden="true">&laquo;</span>
-                    </a>
-                  </li>
-                  <li className="page-item active">
-                    <a className="page-link" href="#">
-                      1
-                    </a>
-                  </li>
-                  <li className="page-item">
-                    <a className="page-link" href="#">
-                      2
-                    </a>
-                  </li>
-                  <li className="page-item">
-                    <a className="page-link" href="#">
-                      3
-                    </a>
-                  </li>
-                  <li className="page-item">
-                    <span className="page-link">...</span>
-                  </li>
-                  <li className="page-item">
-                    <a className="page-link" href="#">
-                      10
-                    </a>
-                  </li>
-                  <li className="page-item">
-                    <a className="page-link" href="#" aria-label="Next">
-                      <span aria-hidden="true">&raquo;</span>
-                    </a>
-                  </li>
-                </ul>
-              </nav>
+            <div className="col-3" style={{ marginLeft: "500px" }}>
+            <div className="pagination-container">
+      <button className="pagination-arrow" disabled>&lt;</button>
+      <button className="pagination-page active">1</button>
+      <button className="pagination-page">2</button>
+      <button className="pagination-page">3</button>
+      <span className="pagination-dots">...</span>
+      <button className="pagination-page">10</button>
+      <button className="pagination-arrow">&gt;</button>
+    </div>
             </div>
           </div>
         </div>

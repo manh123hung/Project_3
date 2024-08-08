@@ -1,4 +1,3 @@
-// Sidebar.tsx
 import "./Sidebar.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -6,12 +5,14 @@ import {
   faMapMarkerAlt,
   faPhoneAlt,
   faSearch,
+  faTimes,
 } from "@fortawesome/free-solid-svg-icons";
 import React, { useEffect, useState } from "react";
 import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
 import { firestore, storage } from "../../lib/firebase";
 import { collection, DocumentData, getDocs } from "firebase/firestore";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
+
 const Sidebar: React.FC = () => {
   const [logo4, setlogo4] = useState("");
 
@@ -30,7 +31,7 @@ const Sidebar: React.FC = () => {
   };
 
   useEffect(() => {
-    //lay anh
+    // Lấy ảnh từ Firebase
     const logo4 = ref(storage, "TrangchuPages/Frame 8 (1).png");
     Promise.all([getDownloadURL(logo4)])
       .then((urls) => {
@@ -56,6 +57,42 @@ const Sidebar: React.FC = () => {
 
     fetchData();
   }, [navigate]);
+
+  const [isSuggestionsVisible, setSuggestionsVisible] = useState(false);
+  const [searchText, setSearchText] = useState("");
+  const [recentSearches, setRecentSearches] = useState([
+    "Công Viên Văn Hóa Đầm Sen",
+    "KDLST Vàm Sát",
+    "Công Viên Văn Hóa Đầm Sen",
+    "Công Viên Văn Hóa Đầm Sen",
+  ]);
+
+  const searchSuggestions = [
+    "Nhân viên phục vụ",
+    "Nhân viên bảo vệ",
+    "Nhân viên thiết kế",
+    "Nhân viên bảo trì",
+    "Nhân viên trợ lý",
+  ];
+
+  const handleSearchClick = () => {
+    setSuggestionsVisible(true);
+  };
+
+  const handleBlur = () => {
+    setTimeout(() => setSuggestionsVisible(false), 200); // Delay để đảm bảo người dùng có thể chọn mục gợi ý trước khi danh sách bị ẩn
+  };
+
+  const handleRemoveRecentSearch = (index: number) => {
+    const updatedSearches = recentSearches.filter((_, i) => i !== index);
+    setRecentSearches(updatedSearches);
+  };
+
+  const handleSuggestionClick = (suggestion: string) => {
+    setSearchText(suggestion);
+    setSuggestionsVisible(false);
+  };
+
   return (
     <div className="col-md-3 sidebar">
       <div className="input-group-append">
@@ -69,10 +106,47 @@ const Sidebar: React.FC = () => {
             className="form-control"
             placeholder="Tìm kiếm"
             style={{ border: "none" }}
+            value={searchText}
+            onClick={handleSearchClick}
+            onChange={(e) => setSearchText(e.target.value)}
+            onBlur={handleBlur}
           />
         </span>
       </div>
+      
+      {isSuggestionsVisible && (
+        <div className="suggestions">
+          {searchText === "" ? (
+            <div className="recent-searches">
+              <strong>Tìm kiếm gần đây:</strong>
+              <ul>
+                {recentSearches.map((item, index) => (
+                  <li key={index}>
+                    {item}
+                    <FontAwesomeIcon
+                      icon={faTimes}
+                      className="close-icon"
+                      onClick={() => handleRemoveRecentSearch(index)}
+                    />
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ) : (
+            <div className="search-suggestions">
+              <ul style={{ listStyleType: "none" }}>
+                {searchSuggestions.map((item, index) => (
+                  <li key={index} onClick={() => handleSuggestionClick(item)}>
+                    <FontAwesomeIcon icon={faSearch} className="search-icon" />{item}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+        </div>
+      )}
 
+      {/* Các thành phần khác */}
       <h4>
         <FontAwesomeIcon icon={faHome} /> Linh vực
       </h4>
@@ -108,7 +182,7 @@ const Sidebar: React.FC = () => {
         <button className="button">Trung tâm DVĐL Đầm Sen</button>
         <button className="button">VP PhuThoTourist</button>
       </div>
-      <img src={logo4} className="logo4" />
+      <img src={logo4} className="logo4" style={{ width: "300px", height: "250px" }} />
     </div>
   );
 };

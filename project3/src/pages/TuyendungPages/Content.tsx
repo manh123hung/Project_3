@@ -1,100 +1,50 @@
-// Content.tsx
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Card from "./Card";
+import { firestore } from "../../lib/firebase";
+import { collection, DocumentData, getDocs } from "firebase/firestore";
 
 const Content: React.FC = () => {
+  const [cardsData, setCardsData] = useState<DocumentData[]>([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const cardsRef = await getDocs(collection(firestore, "Content"));
+        const fetchedData: DocumentData[] = [];
+        cardsRef.forEach((doc) => {
+          fetchedData.push(doc.data());
+        });
+        setCardsData(fetchedData);
+      } catch (error) {
+        console.log("Error fetching data:", error);
+      }
+    };
+    fetchData();
+  }, []);
+
   return (
     <div className="col-md-9">
       <div className="row">
-        <Card
-          title="Nhân viên thiết kế đồ họa"
-          description="Trung tâm dịch vụ du lịch Đầm Sen cần tuyển 2 Nhân viên kinh doanh lữ hành. Yêu cầu: Tốt nghiệp CĐ, ĐH chuyên ngành Du lịch, QT kinh doanh, Marketing. Am hiểu tâm lý..."
-          title2="Đang tuyển"
-        />
-        <Card
-          title="Nhân viên thiết kế đồ họa"
-          description="Trung tâm dịch vụ du lịch Đầm Sen cần tuyển 2 Nhân viên kinh doanh lữ hành. Yêu cầu: Tốt nghiệp CĐ, ĐH chuyên ngành Du lịch, QT kinh doanh, Marketing. Am hiểu tâm lý..."
-          title2="Đang tuyển"
-        />
-        <Card
-          title="Nhân viên thiết kế đồ họa"
-          description="Trung tâm dịch vụ du lịch Đầm Sen cần tuyển 2 Nhân viên kinh doanh lữ hành. Yêu cầu: Tốt nghiệp CĐ, ĐH chuyên ngành Du lịch, QT kinh doanh, Marketing. Am hiểu tâm lý..."
-          title2="Đang tuyển"
-        />
+        {cardsData.map((card, index) => (
+          <Card
+            key={index}
+            title={card.title || "No Title"}
+            description={card.description || "No Description"}
+            title2={card.title2 || "No Status"}
+          />
+        ))}
       </div>
-      <div className="row">
-        <Card
-          title="Nhân viên thiết kế đồ họa"
-          description="Trung tâm dịch vụ du lịch Đầm Sen cần tuyển 2 Nhân viên kinh doanh lữ hành. Yêu cầu: Tốt nghiệp CĐ, ĐH chuyên ngành Du lịch, QT kinh doanh, Marketing. Am hiểu tâm lý..."
-          title2="Đang tuyển"
-        />
-        <Card
-          title="Nhân viên thiết kế đồ họa"
-          description="Trung tâm dịch vụ du lịch Đầm Sen cần tuyển 2 Nhân viên kinh doanh lữ hành. Yêu cầu: Tốt nghiệp CĐ, ĐH chuyên ngành Du lịch, QT kinh doanh, Marketing. Am hiểu tâm lý..."
-          title2="Đang tuyển"
-        />
-        <Card
-          title="Nhân viên thiết kế đồ họa"
-          description="Trung tâm dịch vụ du lịch Đầm Sen cần tuyển 2 Nhân viên kinh doanh lữ hành. Yêu cầu: Tốt nghiệp CĐ, ĐH chuyên ngành Du lịch, QT kinh doanh, Marketing. Am hiểu tâm lý..."
-          title2="Đang tuyển"
-        />
+      <div className="pagination-container" style={{ width: "280px", marginLeft: "400px", marginTop: "20px" }}>
+        <button className="pagination-arrow" disabled>
+          &lt;
+        </button>
+        <button className="pagination-page active">1</button>
+        <button className="pagination-page">2</button>
+        <button className="pagination-page">3</button>
+        <span className="pagination-dots">...</span>
+        <button className="pagination-page">10</button>
+        <button className="pagination-arrow">&gt;</button>
       </div>
-      <div className="row">
-        <Card
-          title="Nhân viên thiết kế đồ họa"
-          description="Trung tâm dịch vụ du lịch Đầm Sen cần tuyển 2 Nhân viên kinh doanh lữ hành. Yêu cầu: Tốt nghiệp CĐ, ĐH chuyên ngành Du lịch, QT kinh doanh, Marketing. Am hiểu tâm lý..."
-          title2="Đang tuyển"
-        />
-        <Card
-          title="Nhân viên thiết kế đồ họa"
-          description="Trung tâm dịch vụ du lịch Đầm Sen cần tuyển 2 Nhân viên kinh doanh lữ hành. Yêu cầu: Tốt nghiệp CĐ, ĐH chuyên ngành Du lịch, QT kinh doanh, Marketing. Am hiểu tâm lý..."
-          title2="Đang tuyển"
-        />
-        <Card
-          title="Nhân viên thiết kế đồ họa"
-          description="Trung tâm dịch vụ du lịch Đầm Sen cần tuyển 2 Nhân viên kinh doanh lữ hành. Yêu cầu: Tốt nghiệp CĐ, ĐH chuyên ngành Du lịch, QT kinh doanh, Marketing. Am hiểu tâm lý..."
-          title2="Đang tuyển"
-        />
-      </div>
-      <nav aria-label="Page navigation example">
-        <ul className="pagination">
-          <li className="page-item">
-            <a className="page-link" href="#" aria-label="Previous">
-              <span aria-hidden="true">&laquo;</span>
-            </a>
-          </li>
-          <li className="page-item active">
-            <a className="page-link" href="#">
-              1
-            </a>
-          </li>
-          <li className="page-item">
-            <a className="page-link" href="#">
-              2
-            </a>
-          </li>
-          <li className="page-item">
-            <a className="page-link" href="#">
-              3
-            </a>
-          </li>
-          <li className="page-item">
-            <a className="page-link" href="#">
-              ...
-            </a>
-          </li>
-          <li className="page-item">
-            <a className="page-link" href="#">
-              10
-            </a>
-          </li>
-          <li className="page-item">
-            <a className="page-link" href="#" aria-label="Next">
-              <span aria-hidden="true">&raquo;</span>
-            </a>
-          </li>
-        </ul>
-      </nav>
     </div>
   );
 };

@@ -1,7 +1,41 @@
 .item {
+  position: relative;
   border: 1px solid #ccc;
   border-radius: 5px;
   overflow: hidden;
+  background-color: white;
+}
+
+.item img {
+  width: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+}
+
+.item:hover img {
+  transform: scale(1.1);
+  opacity: 0.7;
+}
+
+.overlay2 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.5);
+  color: #fff;
+  font-size: 1.5rem;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+  margin-bottom: 180px;
+}
+
+.item:hover .overlay2 {
+  opacity: 1;
 }
 
 .item-content {
@@ -52,14 +86,13 @@
 }
 
 .menu-ngang .nav-link {
-  color: #0054A6;
+  color: #6698CA;
   padding: 10px;
   margin-bottom: 20px;
 }
 
 .menu-ngang .nav-link:hover {
-  background-color: #0066cc;
-  color: white;
+  color: #0054A6;
 }
 
 .menu-ngang .active {
@@ -72,13 +105,101 @@
 }
 
 .article-preview {
+  position: relative; /* Để đặt overlay lên ảnh */
+  overflow: hidden;
   border: none;
 }
 
+/* Pagination.css */
+
+.pagination-container {
+  display: flex;
+  align-items: center;
+  background-color: rgba(255, 255, 255, 0.8);
+  padding: 10px 20px;
+  border-radius: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.pagination-arrow {
+  background: none;
+  border: none;
+  color: #333;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  padding: 5px 10px;
+  border-radius: 50%;
+  transition: background-color 0.3s;
+}
+
+.pagination-arrow:disabled {
+  color: #ccc;
+  cursor: default;
+}
+
+.pagination-arrow:hover:not(:disabled) {
+  background-color: #d1e9f9;
+}
+
+.pagination-page {
+  background: none;
+  border: none;
+  color: #333;
+  font-size: 16px;
+  cursor: pointer;
+  padding: 5px 10px;
+  border-radius: 50%;
+  transition: background-color 0.3s;
+  margin: 0 5px;
+}
+
+.pagination-page:hover {
+  background-color: #d1e9f9;
+}
+
+.pagination-page.active {
+  background-color: #0054A6;
+  color: white;
+}
+
+.pagination-dots {
+  font-size: 16px;
+  color: #666;
+  margin: 0 5px;
+}
+
 .article-preview img {
+  width: 100%;
   height: 200px;
   object-fit: cover;
-  width: 100%;
+  transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+}
+
+.article-preview:hover img {
+  transform: scale(1.1);
+  opacity: 0.7;
+}
+
+.overlay1 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.5);
+  color: #fff;
+  font-size: 1.5rem;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+  margin-bottom: 150px;
+}
+
+.article-preview:hover .overlay1 {
+  opacity: 1;
 }
 
 .article-content {
@@ -100,7 +221,13 @@
   width: 980px;
   margin-left: -280px;
 }
-
+.L1 a{
+  text-decoration: none;
+  color: black ;
+}
+.L1 a:hover{
+  color: #0054A6;
+}
 .slide {
   display: none;
   width: 100%;
@@ -133,7 +260,7 @@
 .arrow {
   cursor: pointer;
   padding: 10px;
-  margin-left: 10px;
+  margin-left: 5px;
   color: #333;
   font-weight: bold;
   font-size: 24px;
@@ -155,18 +282,29 @@
 
 .dot {
   cursor: pointer;
-  height: 15px;
-  width: 15px;
+  height: 15px; 
+  width: 15px;  
   margin: 0 2px;
-  background-color: #bbb;
-  border-radius: 50%;
+  background-color: white; /* Màu trắng cho bên trong chấm */
+  border: 2px solid #3498db; /* Vòng ngoài màu xanh */
+  border-radius: 50%; 
   display: inline-block;
-  transition: background-color 0.6s ease;
+  transition: transform 0.6s ease;
 }
 
 .dot.active {
-  background-color: #717171;
+  background-color: transparent; /* Xóa màu nền khi chấm được chọn có hình ảnh */
 }
+
+.dot-image {
+  height: 130%; 
+  width: 25px; 
+  border-radius: 50%; 
+  margin-left: -7px;
+  margin-top: -2px;
+  display: block;
+}
+
 
 .sidebar .news-item {
   display: flex;

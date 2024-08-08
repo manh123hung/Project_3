@@ -9,7 +9,7 @@
 .logo4{
   width: 340px;
   height: 260px;
-  margin-left: 2px;
+  margin-left: 42px;
   margin-top: 60px;
 }
   .sidebar h4 {
@@ -45,3 +45,105 @@
   .sidebar .button:hover {
     background-color: #e9ecef;
   }
+  .search-container {
+    position: relative;
+    margin-top: -40px; /* Điều chỉnh khoảng cách từ trên xuống */
+  width: 300px;
+  }
+  
+  .search-input-wrapper {
+    display: flex;
+    align-items: center;
+    background-color: white;
+    border-radius: 20px;
+    padding: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .search-input {
+    border: none;
+    outline: none;
+    margin-left: 10px;
+    flex-grow: 1;
+  }
+  
+  .suggestions {
+    position: absolute;
+    top: 220px;
+    width: 18%;
+    background-color: white;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    padding: 10px;
+    z-index: 1000;
+  }
+  .suggestions ul {
+    padding: 0;
+    margin: 0;
+  }
+  
+  .suggestions li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px 10px;
+    cursor: pointer;
+  }
+  
+  .suggestions li:hover {
+    background-color: #f0f0f0;
+  }
+  .close-icon {
+    margin-left: 10px;
+    color: #888;
+    cursor: pointer;
+  }
+  
+  .close-icon:hover {
+    color: #000;
+  }
+  
+  .recent-searches {
+    margin-bottom: 10px;
+    list-style-type: none;
+  }
+  
+  .recent-searches strong {
+    display: block;
+    margin-bottom: 10px;
+  }
+  .search-suggestions li {
+    cursor: pointer;
+  }
+  
+  .search-suggestions li:hover {
+    background-color: #f0f0f0;
+  }
+  
+  .search-icon {
+    margin-right: 10px;
+  }
+  .recent-searches ul {
+    padding: 0;
+    margin: 0;
+    list-style-type: none;
+  }
+  
+  .recent-searches li {
+    padding: 8px 12px;
+    cursor: pointer;
+    border-radius: 4px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .recent-searches li:hover {
+    background-color: #f0f0f0;
+  }
+  
+  .suggestion-icon {
+    margin-right: 10px;
+    color: gray;
+  }
+  

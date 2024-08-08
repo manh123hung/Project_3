@@ -35,32 +35,20 @@
   justify-content: center;
 }
 
-.card-footer .button {
-  background-color: #003F7D;
-  color: white;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  width: 600px;
-}
 .bt01 {
   background-color: #E6F7E6;
   color: #03A600;
-  border: none;
   border-radius: 20px;
   font-size: 15px;
   white-space: nowrap;
-
 }
+
 .bt02 {
   background-color: #F7E6E6;
   color: #FF3939;
-  border: none;
   border-radius: 20px;
   font-size: 15px;
   white-space: nowrap;
-
 }
 .button:hover {
   background-color: #0056b3;

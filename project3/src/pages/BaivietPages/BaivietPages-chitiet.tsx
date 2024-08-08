@@ -79,7 +79,9 @@ function BaivietChitiet() {
     // Lấy dữ liệu từ Firestore
     const fetchData = async () => {
       try {
-        const quanlyRef = await getDocs(collection(firestore, "TrangchuPages"));
+        const quanlyRef = await getDocs(
+          collection(firestore, "Trangchuchitiet")
+        );
         const fetchedData: DocumentData[] = [];
 
         quanlyRef.forEach((doc) => {
@@ -144,8 +146,9 @@ function BaivietChitiet() {
   }) => {
     return (
       <div className="col-md-3 mb-4">
-        <div className="item" style={{ backgroundColor: "white" }}>
+        <div className="item">
           <img src={imageUrl} className="img-fluid" alt="Item Image" />
+          <div className="overlay2">Click để xem</div>
           <div className="item-content">
             <div className="author">
               <span>{admin}</span>
@@ -256,7 +259,13 @@ function BaivietChitiet() {
                 className="text-center"
                 style={{ marginLeft: "-50px", color: "#0054A6" }}
               >
-                <h1 className="title">TUYỂN DỤNG</h1>
+                <h1 className="title">
+                  {data.map((item, index) => (
+                    <div key={index}>
+                      <div dangerouslySetInnerHTML={{ __html: item.title1 }} />
+                    </div>
+                  ))}
+                </h1>
               </div>
             </div>
             <div
@@ -281,11 +290,27 @@ function BaivietChitiet() {
                             >
                               {" "}
                               <b>
-                                Kết quả đấu giá giữ xe tại CVVH Đầm Sen 2022
+                                {data.map((item, index) => (
+                                  <div key={index}>
+                                    <div
+                                      dangerouslySetInnerHTML={{
+                                        __html: item.title2,
+                                      }}
+                                    />
+                                  </div>
+                                ))}
                               </b>
                             </h1>
                             <div className="job-info">
-                              by tuyendung in on Tháng Năm 21, 2020
+                              {data.map((item, index) => (
+                                <div key={index}>
+                                  <div
+                                    dangerouslySetInnerHTML={{
+                                      __html: item.title3,
+                                    }}
+                                  />
+                                </div>
+                              ))}{" "}
                             </div>
                           </div>
                         </div>
@@ -294,84 +319,27 @@ function BaivietChitiet() {
                     <br />
                     <img src={hinh2} className="img-fluid" />
                   </div>
+                  {data.map((item, index) => (
+                    <div key={index}>
+                      <div dangerouslySetInnerHTML={{ __html: item.label }} />
+                    </div>
+                  ))}
 
-                  <p>
-                    Công ty Cổ phần Dịch vụ Du lịch Phú Thọ xin thông báo đến
-                    các đơn vị tham gia đấu giá cạnh tranh hạng mục “Hợp tác giữ
-                    xe 02 – 04 bánh tại Công viên văn hóa Đầm Sen (Số 03 Hòa
-                    Bình, Phường 03, Quận 11, TP.HCM), kết quả như sau.{" "}
-                  </p>
-                  <ul>
-                    <li>Tên hạng mục đấu giá: Hợp tác giữ xe 02 -04 bánh.</li>
-                    <li>
-                      Giá khởi điểm được duyệt: 241.667.000 đồng/tháng (đã bao
-                      gồm thuế GTGT).
-                    </li>
-                    <li>
-                      Bên mời đấu giá: Công ty Cổ phần Dịch vụ Du lịch Phú Thọ
-                      (Địa chỉ: Số 15 đường số 2 cư xá Lữ Gia, Phường 15, Quận
-                      11, TP.HCM).
-                    </li>
-                    <li>Địa điểm thực hiện: Công viên văn hóa Đầm Sen.</li>
-                    <li>Hình thức lựa chọn đơn vị: Đấu giá cạnh tranh</li>
-                  </ul>
-                  <p>Kết quả lựa chọn đơn vị:</p>
-                  <ul>
-                    <li>
-                      Công ty TNHH Thương mại Dịch vụ Hai Tám Sáu (Mã số doanh
-                      nghiệp: 0313270903 – Địa chỉ: 247/8B Hoàng Hoa Thám,
-                      Phường 05, Quận Phú Nhuận, TP.HCM)
-                    </li>
-                    <li>
-                      Giá tham gia: 13.500.000.000 đồng (đã gồm thuế GTGT)
-                    </li>
-                    <li>
-                      Xếp hạng hồ sơ: Hạng 1+ Giá trúng đấu giá: 13.500.000.000
-                      đồng (đã gồm thuế GTGT)
-                    </li>
-                    <li>
-                      Loại hợp đồng: Hợp đồng hợp tác kinh doanh+ Thời gian thực
-                      hiện hợp đồng: 03 năm
-                    </li>
-                  </ul>
-                  <p>
-                    Đề nghị Công ty TNHH TMDV Hai Tám Sáu trong vòng 02 ngày kể
-                    từ thời điểm nhận được thông báo trúng đấu giá của Công ty
-                    Cổ phần Dịch vụ Du lịch Phú Thọ, phải tiến hành thương thảo
-                    và ký hợp đồng. Nộp tiền bảo lãnh thực hiện hợp đồng bằng
-                    tiền mặt hoặc chuyển khoản tương ứng số tiền: 895.000.000
-                    đồng (365 triệu/tháng x 03 tháng = 1.095.000.000 đồng trừ
-                    200 triệu đồng tiền đã ký quỹ) ngay sau khi ký hợp đồng cho
-                    Công ty Cổ phần Dịch vụ Du lịch Phú Thọ theo đúng Hồ sơ yêu
-                    cầu mời đấu giá cạnh tranh ngày 31/5/2022.
-                  </p>
-                  <p>
-                    Nếu quá thời hạn trên mà không thực hiện thương thảo, ký hợp
-                    đồng hoặc không nộp đủ số tiền bảo lãnh thực hiện hợp đồng,
-                    thì sẽ mất tiền ký quỹ và mặt bằng đấu giá hợp tác sẽ được
-                    chuyển cho khách hàng có hồ sơ đấu giá xếp hạng hai.
-                  </p>
-                  <p>
-                    Kế hoạch ký kết hợp đồng với đơn vị được lựa chọn: Dự kiến
-                    trước ngày 30/6/2022.
-                  </p>
-                  <p>
-                    Với những công ty không trúng đấu giá hợp tác sẽ được nhận
-                    lại ngay số tiền đã nộp ký quỹ là 200.000.000 đồng tại Văn
-                    phòng Công ty Cổ phần Dịch vụ Du lịch Phú Thọ.
-                  </p>
-                  <p>
-                    Thông báo này là cơ sở để ký kết hợp đồng với nhà cung cấp
-                    trúng thầu đúng theo quy định.Trân trọng.
-                  </p>
-                  <p>Chi tiết xem trong văn bản đính kèm</p>
                   <img
                     src={hinh1}
                     className="img-fluid"
                     style={{ marginLeft: "250px" }}
                   />
                   <h2 style={{ color: "#003F7D" }}>
-                    <b>Bài viết liên quan</b>
+                    <b>
+                      {data.map((item, index) => (
+                        <div key={index}>
+                          <div
+                            dangerouslySetInnerHTML={{ __html: item.title4 }}
+                          />
+                        </div>
+                      ))}
+                    </b>
                   </h2>
                   <div className="container-fluid">
                     <div className="row">

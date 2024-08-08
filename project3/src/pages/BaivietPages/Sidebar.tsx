@@ -1,9 +1,9 @@
 import "./BaivietPages.css";
 import React, { useEffect, useState } from "react";
-import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { firestore, storage } from "../../lib/firebase";
 import { collection, DocumentData, getDocs } from "firebase/firestore";
-import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
+import { ref, getDownloadURL } from "firebase/storage";
 
 interface NewsItem {
   thumbnail: string;
@@ -13,53 +13,31 @@ interface NewsItem {
 }
 
 const Sidebar: React.FC = () => {
-  const [logo4, setlogo4] = useState("");
-  const [hinh1, sethinh1] = useState("");
-  const [hinh2, sethinh2] = useState("");
-  const [hinh3, sethinh3] = useState("");
-  const [hinh4, sethinh4] = useState("");
+  const [images, setImages] = useState<string[]>([]);
   const location = useLocation();
   const navigate = useNavigate();
   const [data, setData] = useState<DocumentData[]>([]);
-  const [file, setFile] = useState<File | null>(null);
-  const [uploadProgress, setUploadProgress] = useState(0);
-  const [download, setDownload] = useState("");
-
-  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    if (event.target.files && event.target.files[0]) {
-      setFile(event.target.files[0]);
-    }
-  };
 
   useEffect(() => {
-    // lay anh
-    const logo4Ref = ref(storage, "BaivietPages/Rectangle 3.png");
-    const hinh1Ref = ref(storage, "BaivietPages/image 25.png");
-    const hinh2Ref = ref(storage, "BaivietPages/image 25 (2).png");
-    const hinh3Ref = ref(storage, "BaivietPages/image 25 (3).png");
-    const hinh4Ref = ref(storage, "BaivietPages/image 25 (4).png");
+    // Fetch image URLs from Firebase Storage
+    const imageRefs = [
+      ref(storage, "BaivietPages/Rectangle 3.png"),
+      ref(storage, "BaivietPages/image 25.png"),
+      ref(storage, "BaivietPages/image 25 (2).png"),
+      ref(storage, "BaivietPages/image 25 (3).png"),
+      ref(storage, "BaivietPages/image 25 (4).png"),
+    ];
 
-    Promise.all([
-      getDownloadURL(logo4Ref),
-      getDownloadURL(hinh1Ref),
-      getDownloadURL(hinh2Ref),
-      getDownloadURL(hinh3Ref),
-      getDownloadURL(hinh4Ref),
-    ])
-      .then((urls) => {
-        setlogo4(urls[0]);
-        sethinh1(urls[1]);
-        sethinh2(urls[2]);
-        sethinh3(urls[3]);
-        sethinh4(urls[4]);
-      })
+    Promise.all(imageRefs.map(getDownloadURL))
+      .then(setImages)
       .catch((error) => {
         console.log("Error getting URLs:", error);
       });
 
+    // Fetch data from Firestore
     const fetchData = async () => {
       try {
-        const quanlyRef = await getDocs(collection(firestore, "WS"));
+        const quanlyRef = await getDocs(collection(firestore, "BMN"));
         const fetchedData: DocumentData[] = [];
 
         quanlyRef.forEach((doc) => {
@@ -74,38 +52,14 @@ const Sidebar: React.FC = () => {
 
     fetchData();
   }, [navigate]);
-  const newsItems: NewsItem[] = [
-    {
-      thumbnail: logo4,
-      title: "Thông báo đấu giá giữ xe tại CVVH Đầm Sen",
-      views: "10k views",
-      date: "20/02/2022",
-    },
-    {
-      thumbnail: hinh1,
-      title: "Thông báo đấu giá giữ xe tại CVVH Đầm Sen",
-      views: "10k views",
-      date: "20/02/2022",
-    },
-    {
-      thumbnail: hinh2,
-      title: "Thông báo đấu giá giữ xe tại CVVH Đầm Sen",
-      views: "10k views",
-      date: "20/02/2022",
-    },
-    {
-      thumbnail: hinh3,
-      title: "Thông báo đấu giá giữ xe tại CVVH Đầm Sen",
-      views: "10k views",
-      date: "20/02/2022",
-    },
-    {
-      thumbnail: hinh4,
-      title: "Thông báo đấu giá giữ xe tại CVVH Đầm Sen",
-      views: "10k views",
-      date: "20/02/2022",
-    },
-  ];
+
+  const newsItems: NewsItem[] = data.map((item, index) => ({
+    thumbnail: images[index % images.length] || "",
+    title: item.title || "No Title",
+    views: item.views || "0 views",
+    date: item.date || "No Date",
+  }));
+
   return (
     <div className="sidebar">
       <h4>
@@ -116,7 +70,9 @@ const Sidebar: React.FC = () => {
           <img src={item.thumbnail} alt="News Thumbnail" />
           <div>
             <h6>
-              <b> {item.title}</b>
+              <b className="L1">
+                <Link to="/">{item.title}</Link>
+              </b>
             </h6>
             <p>
               {item.views} | {item.date}
