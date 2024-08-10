@@ -30,8 +30,8 @@ const Card: React.FC<CardProps> = ({ title, description, title2 }) => {
   };
 
   return (
-    <div className="col-md-4" style={{ fontFamily: "Roboto" }}>
-      <div className="card" style={{ backgroundColor: "rgba(255, 255, 255, 0.9)" }}>
+    <div className="col-md-4" style={{ fontFamily: "Roboto"}}>
+      <div className="card" style={{ backgroundColor: "rgba(255, 255, 255, 0.9)" ,marginLeft:"5px",marginBottom:"5px" }}>
         <div className="card-header">
           <div className="card-header-left">
             <img src={logo4} alt="Logo" />

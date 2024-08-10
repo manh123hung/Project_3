@@ -137,7 +137,7 @@ const Sidebar: React.FC = () => {
               <ul style={{ listStyleType: "none" }}>
                 {searchSuggestions.map((item, index) => (
                   <li key={index} onClick={() => handleSuggestionClick(item)}>
-                    <FontAwesomeIcon icon={faSearch} className="search-icon" />{item}
+                    <FontAwesomeIcon icon={faSearch} className="search-icon" style={{marginRight:"410px"}} />{item}
                   </li>
                 ))}
               </ul>

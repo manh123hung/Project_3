@@ -14,6 +14,53 @@
   td {
     border-right: 1px solid #ddd; /* Thêm đường kẻ bên phải cho các ô td */
   }
+  .file-upload {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  label {
+    font-weight: bold;
+    margin-bottom: 8px;
+  }
+  
+  .file-upload-container {
+    display: flex;
+    align-items: center;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 8px;
+    max-width: 300px;
+    background-color: #f9f9f9;
+  }
+  
+  .file-upload-label {
+    flex-grow: 1;
+    color: #888;
+  }
+  
+  .cv-icon {
+    margin-left: 8px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+  }
+  
+  .cv-icon input {
+    display: none;
+  }
+  
+  .cv-icon::after {
+    content: "📎";
+    font-size: 20px;
+    color: #007bff;
+    cursor: pointer;
+  }
+  
+  .cv-icon:hover::after {
+    color: #0056b3;
+  }
+  
   .company-logo {
     width: 60px;
     height: 60px;

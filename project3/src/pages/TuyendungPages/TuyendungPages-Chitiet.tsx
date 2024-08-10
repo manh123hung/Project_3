@@ -1,5 +1,5 @@
 // Navbar.tsx
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
 import { collection, DocumentData, getDocs } from "firebase/firestore";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
@@ -61,7 +61,7 @@ function TuyendungChitiet() {
     // Lấy dữ liệu từ Firestore
     const fetchData = async () => {
       try {
-        const quanlyRef = await getDocs(collection(firestore, "TrangchuPages"));
+        const quanlyRef = await getDocs(collection(firestore, "TuyendungPages"));
         const fetchedData: DocumentData[] = [];
 
         quanlyRef.forEach((doc) => {
@@ -106,7 +106,23 @@ function TuyendungChitiet() {
       }
     );
   };
+  const [fileName, setFileName] = useState<string>("Không có tập tin nào được chọn");
+  const fileInputRef = useRef<HTMLInputElement | null>(null);
 
+  const handleFileChange1 = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (file) {
+      setFileName(file.name);
+    } else {
+      setFileName("Không có tập tin nào được chọn");
+    }
+  };
+
+  const handleIconClick = () => {
+    if (fileInputRef.current) {
+      fileInputRef.current.click();
+    }
+  };
   return (
     <div>
       <Navbar />
@@ -138,7 +154,11 @@ function TuyendungChitiet() {
                 className="text-center"
                 style={{ marginLeft: "-50px", color: "#0054A6" }}
               >
-                <h1 className="title">TUYỂN DỤNG</h1>
+                <h1 className="title">{data.map((item, index) => (
+                      <div key={index}>
+                        <div dangerouslySetInnerHTML={{ __html: item.name }} />
+                      </div>
+                    ))}</h1>
               </div>
             </div>
             <div
@@ -163,15 +183,22 @@ function TuyendungChitiet() {
                               style={{ color: "#003F7D" }}
                             >
                               {" "}
-                              <b> Nhân viên thiết kế đồ họa</b>
+                              <b> {data.map((item, index) => (
+                      <div key={index}>
+                        <div dangerouslySetInnerHTML={{ __html: item.t01 }} />
+                      </div>
+                    ))}</b>
                             </h1>
 
                             <p
                               className="job-description"
                               style={{ color: "#003F7D" }}
                             >
-                              Nhân viên chính thức
-                            </p>
+{data.map((item, index) => (
+                      <div key={index}>
+                        <div dangerouslySetInnerHTML={{ __html: item.t02 }} />
+                      </div>
+                    ))}                            </p>
                             <div className="job-info">
                               <FontAwesomeIcon icon={faMapMarkerAlt} /> CVVH Đầm
                               Sen&nbsp;&nbsp;
@@ -181,175 +208,38 @@ function TuyendungChitiet() {
                         </div>
                       </div>
                       <div className="col-md-2">
-                        <button className="apply-button">Đăng tuyển</button>
+                        <button className="apply-button">{data.map((item, index) => (
+                      <div key={index}>
+                        <div dangerouslySetInnerHTML={{ __html: item.t03 }} />
+                      </div>
+                    ))}</button>
                       </div>
                     </div>
                     <img src={hinh2} className="img-fluid" />
                   </div>
-
-                  <h1 style={{ color: "#003F7D" }}>Chi tiết tuyển dụng</h1>
+                    <br />
+                  <h1 style={{ color: "#003F7D" }}>{data.map((item, index) => (
+                      <div key={index}>
+                        <div dangerouslySetInnerHTML={{ __html: item.title }} />
+                      </div>
+                    ))}</h1>
 
                   <table className="table1">
-                    <tr style={{ backgroundColor: "rgba(255, 255, 255, 0.8)" }}>
-                      <th>Vị trí</th>
-                      <th>Nhân viên thiết kế đồ họa</th>
-                    </tr>
-                    <tr>
-                      <td className="h01">Số lượng</td>
-                      <td className="h01">02 người</td>
-                    </tr>
-                    <tr>
-                      <td className="h01">Nơi làm việc</td>
-                      <td className="h01">Công viên văn hóa Bắc Sơn</td>
-                    </tr>
-                    <tr>
-                      <td>Địa chỉ làm việc</td>
-                      <td>3 Hòa Bình, Phường 3, Quận 11, TPHCM</td>
-                    </tr>
-                    <tr>
-                      <td>Mô tả công việc</td>
-                      <td>
-                        <ul>
-                          <li>
-                            Thiết kế hình ảnh, brochure, banner, poster, plano,
-                            backdrop sản phẩm, các loại tài liệu văn phòng và
-                            các ấn phẩm phục vụ sự kiện, truyền thông của công
-                            việc.
-                          </li>
-                          <li>Chụp hình, quay phim, dựng video đơn giản.</li>
-                          <li>
-                            Liên phục, hao, đổi ý tưởng với quản lý và hoàn
-                            thiện thiết kế.
-                          </li>
-                          <li>
-                            Các chi tiết về công việc được trao đổi tại buổi
-                            phỏng vấn.
-                          </li>
-                        </ul>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>Ngày làm việc</td>
-                      <td>-</td>
-                    </tr>
-                    <tr>
-                      <td>Giờ làm việc</td>
-                      <td>Giờ hành chính</td>
-                    </tr>
-                    <tr>
-                      <td>Quyền lợi</td>
-                      <td>
-                        <ul>
-                          <li>
-                            Được ký hợp đồng lao động, tham gia đầy đủ chế độ
-                            BHXH.
-                          </li>{" "}
-                          <li>
-                            Thưởng tháng 13, 14, các ngày lễ, tết trong năm.
-                          </li>{" "}
-                          <li>Được phục vụ bữa ăn trưa tại nơi làm việc.</li>{" "}
-                          <li>
-                            Được trang bị đồng phục, khám sức khỏe định kỳ hàng
-                            năm.
-                          </li>{" "}
-                          <li>Được tham gia Bảo hiểm tai nạn 24/24.</li>{" "}
-                          <li>
-                            Nghỉ phép: 12 ngày phép / năm, công tác 5 năm thêm 1
-                            ngày.
-                          </li>{" "}
-                          <li>
-                            Được tham gia miễn phí các khóa đào tạo nâng cao
-                            nghiệp vụ.
-                          </li>{" "}
-                          <li>
-                            Môi trường làm việc thân thiện, nhiều cơ hội học hỏi
-                            từ đội ngũ quản lý, nhân sự giàu kinh nghiệm, nhiệt
-                            huyết.
-                          </li>{" "}
-                          <li>
-                            Các chế độ khác: Quà sinh nhật, cưới hỏi, lì xì tết.
-                            Quà trung thu, quà Tết, quà thiếu nhi 1/6.
-                          </li>{" "}
-                          <li>
-                            Hỗ trợ ốm đau, ma chay, sinh con. Tham gia Ngày hội
-                            Gia đình, Ngày hội Tuổi thơ, hoạt động văn thể mỹ
-                            hàng năm.
-                          </li>
-                        </ul>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>Yêu cầu</td>
-                      <td>
-                        <ul>
-                          <li>
-                            Được ký hợp đồng lao động, tham gia đầy đủ chế độ
-                            BHXH, BHYT.
-                          </li>{" "}
-                          <li>
-                            Lương cơ bản theo bảng lương, thưởng doanh số,
-                            thưởng sáng tạo theo KPI.
-                          </li>{" "}
-                          <li>
-                            Được hưởng các chế độ phụ cấp: phụ cấp chuyên môn,
-                            phụ cấp làm thêm giờ, phụ cấp công tác, phụ cấp hiệu
-                            quả...
-                          </li>{" "}
-                          <li>
-                            Hỗ trợ công cụ làm việc: máy tính, phần mềm, máy
-                            ảnh, máy quay, flycam...
-                          </li>{" "}
-                          <li>
-                            Nghỉ phép năm, nghỉ lễ, tết theo quy định, được tham
-                            gia các hoạt động văn hóa - thể thao của công ty.
-                          </li>{" "}
-                          <li>
-                            Được hỗ trợ chi phí điện thoại, Internet, xe đi lại,
-                            bữa ăn giữa ca.
-                          </li>{" "}
-                          <li>
-                            Chương trình đào tạo, nâng cao chuyên môn, kỹ năng
-                            miễn phí.
-                          </li>{" "}
-                          <li>
-                            Chính sách bảo hiểm (BHXH, BHYT, BHTN, Bảo hiểm tai
-                            nạn 24/7).
-                          </li>{" "}
-                          <li>
-                            Các chế độ khác như: trợ cấp thôi việc, nghỉ việc,
-                            hỗ trợ ốm đau, tang lễ, sinh con...
-                          </li>{" "}
-                        </ul>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>Độ tuổi</td>
-                      <td>22-27 tuổi</td>
-                    </tr>
-                    <tr>
-                      <td>Trình độ</td>
-                      <td>Cao đẳng</td>
-                    </tr>
-                    <tr>
-                      <td>Hồ sơ gồm</td>
-                      <td>
-                        <ul>
-                          <li>
-                            Ứng viên vui lòng gửi CV đến email:
-                            tuyendung@damsenpark.vn.
-                          </li>
-                          <li>
-                            Hoặc nộp bộ sơ trực tiếp tại Tầu số Vân phòng Công
-                            ty 15 đường số 2, cụ xã Lê Gia, P.15, Quận 11. (ĐT:
-                            028 38 650 921 - Phòng Nhân sự).
-                          </li>
-                        </ul>
-                      </td>
-                    </tr>
+                  {data.map((item, index) => (
+                      <div key={index}>
+                        <div dangerouslySetInnerHTML={{ __html: item.label }} />
+                      </div>
+                    ))}
                   </table>
                 </div>
                 <div className="container-fluid" style={{ padding: "40px" }}>
-                  <h1 style={{ color: "#003F7D" }}>Ứng tuyển Online</h1>
+                  <h1 style={{ color: "#003F7D" }}>
+                  {data.map((item, index) => (
+                      <div key={index}>
+                        <div dangerouslySetInnerHTML={{ __html: item.title2 }} />
+                      </div>
+                    ))}
+                  </h1>
                   <div className="row">
                     <div className="col-md-6">
                       <div>
@@ -545,23 +435,24 @@ function TuyendungChitiet() {
                           style={{ border: "none" }}
                         />
                       </div>
-                      <div>
-                        <label htmlFor="cv">Đính kèm CV</label>
-                        <div>
-                          <span id="cv-label">
-                            Không có tập tin nào được chọn
-                          </span>
-                          <span className="cv-icon">
-                            {" "}
-                            <input
-                              type="file"
-                              id="cv"
-                              className="form-control-file"
-                            />
-                            📎
-                          </span>
-                        </div>
-                      </div>
+                  <div className="file-upload">
+                <label htmlFor="cv">Đính kèm CV</label>
+                <div className="file-upload-container">
+                  <span id="cv-label" className="file-upload-label">
+                    {fileName}
+                  </span>
+                  <span className="cv-icon" onClick={handleIconClick}>
+                    <input
+                      type="file"
+                      id="cv"
+                      className="form-control-file"
+                      onChange={handleFileChange1}
+                      ref={fileInputRef}
+                    />
+                    
+                  </span>
+                </div>
+              </div>
                       <div>
                         <label htmlFor="lamthemgio">
                           Bạn có sẵn sàng làm thêm giờ

@@ -69,68 +69,79 @@ table {
     align-items: center; /* Căn giữa theo chiều ngang */
   }
   
-  .cards-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center; /* Căn giữa theo chiều ngang */
-    gap: 20px; /* Khoảng cách giữa các thẻ */
-  }
-  
   .card1 {
     background-color: rgba(255, 255, 255, 0.8);
     border: none;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     border-radius: 10px;
     transition: transform 0.3s ease;
-    width: 177.55px; /* Cài đặt chiều rộng cho thẻ card */
-    height: 261px; /* Cài đặt chiều cao cho thẻ card */
-    position: relative; /* Cho phép đặt ảnh lên trên */
+    width: 177.55px;
+    height: 261px;
+    position: relative;
+    overflow: hidden;
   }
   
   .card1:hover {
     transform: translateY(-5px);
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
-    
   }
   
   .card-body {
     text-align: center;
+    position: relative;
+    height: 100%;
+  }
+  
+  .card-title, .card-text {
+    position: absolute;
+    width: 100%;
+    color: #fff;
+    text-align: center;
+    padding: 0 10px;
   }
   
   .card-title {
+    top: 60%;
     font-size: 15px;
     font-weight: bold;
-    position: absolute; /* Đặt tiêu đề lên trên ảnh */
-    top: 70%; /* Căn giữa theo chiều dọc */
-    left: 50%; /* Căn giữa theo chiều ngang */
-    transform: translate(-50%, -50%); /* Căn giữa theo chiều ngang và dọc */
-    color: #fff; /* Màu chữ trắng */
-    white-space: nowrap; /* Ngăn dòng mới */
-    overflow: hidden; /* Ẩn nội dung thừa */
-    text-overflow: ellipsis; /* Hiển thị dấu "..." */
-    /* Điều chỉnh khoảng cách giữa các dòng */
   }
   
   .card-text {
+    bottom: 50px;
     font-size: 14px;
-    position: absolute; /* Đặt nội dung lên trên ảnh */
-    bottom: 50px; /* Khoảng cách từ dưới lên */
-    left: 50%; /* Căn giữa theo chiều ngang */
-    transform: translateX(-50%); /* Căn giữa theo chiều ngang */
-    color: #fff; /* Màu chữ trắng */
-    white-space: nowrap; /* Ngăn dòng mới */
-    overflow: hidden; /* Ẩn nội dung thừa */
-    text-overflow: ellipsis; /* Hiển thị dấu "..." */
   }
-  .card1:hover .card-text::after {
-    display: block;
+  
+  .card-overlay {
+    display: none;
     position: absolute;
-    bottom: -20px; /* Điều chỉnh khoảng cách từ dưới lên */
-    left: 50%;
-    transform: translateX(-50%);
-    color: #0054A6;
-    font-size: 14px;
-  }  
+    bottom: 0;
+    left: 0;
+    right: 0;
+    top: 10;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    font-weight: bold;
+    transition: opacity 0.3s ease;
+    opacity: 0;
+    margin-bottom:15px;
+  }
+  
+  .card1:hover .card-overlay {
+    display: flex;
+    opacity: 1;
+  }
+  
+  .card-body img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
   .title {
     background-color: rgba(255, 255, 255, 0.8);
     padding: 10px 20px;
@@ -147,15 +158,6 @@ table {
     position: relative; /* Cho phép đặt ảnh lên trên */
     top: 50%; /* Căn giữa theo chiều dọc */
     transform: translateY(-50%); /* Căn giữa theo chiều dọc */
-  }
-  
-  .card-body img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover; /* Điều chỉnh kích thước ảnh cho phù hợp */
-    position: absolute; /* Đặt ảnh lên trên */
-    top: 0; /* Vị trí ảnh */
-    left: 0; /* Căn trái */
   }
 .nv1 {
   background-color: white;

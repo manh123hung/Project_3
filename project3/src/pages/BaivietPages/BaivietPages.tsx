@@ -306,7 +306,7 @@ function BaivietPages() {
 {isSuggestionsVisible && (
         <div className="suggestions">
           {searchText === "" ? (
-            <div className="recent-searches">
+            <div className="recent-searches" style={{width:"600px",backgroundColor:"white",marginTop:"-180px",marginLeft:"30px",padding:"10px"}}>
               <strong>Tìm kiếm gần đây:</strong>
               <ul>
                 {recentSearches.map((item, index) => (
@@ -322,10 +322,10 @@ function BaivietPages() {
               </ul>
             </div>
           ) : (
-            <div className="search-suggestions">
+            <div className="search-suggestions" style={{width:"600px",backgroundColor:"white",marginTop:"-180px",marginLeft:"30px",padding:"10px"}}>
               <ul style={{ listStyleType: "none" }}>
                 {searchSuggestions.map((item, index) => (
-                  <li key={index} onClick={() => handleSuggestionClick(item)}>
+                  <li key={index} onClick={() => handleSuggestionClick(item)} style={{marginRight:"410px"}}>
                     <FontAwesomeIcon icon={faSearch} className="search-icon" />{item}
                   </li>
                 ))}
@@ -401,6 +401,7 @@ function BaivietPages() {
       <button className="pagination-page">10</button>
       <button className="pagination-arrow">&gt;</button>
     </div>
+    <br />
           </div>
         </div>
       </div>

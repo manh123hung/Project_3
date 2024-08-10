@@ -79,7 +79,7 @@ function TuyendungPages() {
     // Lấy dữ liệu từ Firestore
     const fetchData = async () => {
       try {
-        const quanlyRef = await getDocs(collection(firestore, "TrangchuPages"));
+        const quanlyRef = await getDocs(collection(firestore, "TuyendungPages"));
         const fetchedData: DocumentData[] = [];
 
         quanlyRef.forEach((doc) => {
@@ -156,7 +156,12 @@ function TuyendungPages() {
                 className="text-center"
                 style={{ marginLeft: "-50px", color: "#0054A6" }}
               >
-                <h1 className="title">TUYỂN DỤNG</h1>
+                <h1 className="title">
+                  {data.map((item, index) => (
+                      <div key={index}>
+                        <div dangerouslySetInnerHTML={{ __html: item.name }} />
+                      </div>
+                    ))}</h1>
               </div>
             </div>
             <div

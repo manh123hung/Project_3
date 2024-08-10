@@ -172,6 +172,8 @@ function TailieuPages() {
         />
         <h5 className="card-title">{title}</h5>
         <p className="card-text">{text}</p>
+        <div className="card-overlay">Click to See</div>
+
       </div>
     </div>
     );
@@ -296,7 +298,7 @@ function TailieuPages() {
             <div className="col-md-4">
               <div className="form-group">
                 <label htmlFor="date-from">
-                  <b style={{ color: "#0054A6" }}> Ngày tạo:</b>
+                  <b style={{ color: "#0054A6",marginLeft:"10px" }}> Ngày tạo:</b>
                 </label>
                 <div className="input-group">
                   <input

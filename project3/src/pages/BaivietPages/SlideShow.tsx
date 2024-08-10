@@ -74,7 +74,7 @@ const SlideShow: React.FC = () => {
 
   return (
     <div className="main-content">
-      <div style={{ height: "450px" }}>
+      <div style={{ height: "500px" }}>
         {slidesData.map((slide, index) => (
           <Slide
             key={index}
@@ -93,7 +93,7 @@ const SlideShow: React.FC = () => {
               <Arrow direction="right" onClick={() => plusSlides(1)} />
             </div>
           </div>
-          <p>{slidesData[activeIndex].description}</p>
+          <p style={{fontSize:"17px"}}>{slidesData[activeIndex].description}</p>
         </div>
       )}
       <Dots

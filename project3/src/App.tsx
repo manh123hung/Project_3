@@ -4,8 +4,7 @@ import { DocumentData, collection, getDocs } from 'firebase/firestore';
 import { firestore } from './lib/firebase';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
-import Navbar from './component/Navbar';
-import Footer from './component/Footer';
+
 import TrangchuPages from './pages/TrangchuPages/TrangchuPages';
 import TailieuPages from './pages/TaiLieuPages/TailieuPages';
 import TuyendungPages from './pages/TuyendungPages/TuyendungPages';

@@ -61,7 +61,7 @@ const Sidebar: React.FC = () => {
   }));
 
   return (
-    <div className="sidebar">
+    <div className="sidebar" style={{height:"700px"}}>
       <h4>
         <b>Bài mới nhất</b>
       </h4>

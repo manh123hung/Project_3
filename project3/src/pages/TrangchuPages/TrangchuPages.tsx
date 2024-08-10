@@ -251,10 +251,23 @@ function TrangchuPages() {
             <div className="row">
               <div className="text-center" style={{ marginLeft: "-270px" }}>
                 <h3 className="title2">
-                  CÔNG TY CỔ PHẦN DỊCH VỤ DU LỊCH PHÚ THỌ
-                </h3>
-                <h1 className="title3">PHUTHOTOURIST</h1>
-                <h5 className="title2">Ngày thành lập 01/01/2019</h5>
+                {data.map((item, index) => (
+                  <div key={index}>
+                    <div dangerouslySetInnerHTML={{ __html: item.title2 }} />
+                  </div>
+                ))}                </h3>
+                <h1 className="title3">   
+                  {data.map((item, index) => (
+                  <div key={index}>
+                    <div dangerouslySetInnerHTML={{ __html: item.title3 }} />
+                  </div>
+                ))}</h1>
+                <h5 className="title2">   
+                  {data.map((item, index) => (
+                  <div key={index}>
+                    <div dangerouslySetInnerHTML={{ __html: item.title4 }} />
+                  </div>
+                ))}</h5>
               </div>
             </div>
             <div className="row" style={{ marginRight: "550px" }}>
@@ -316,7 +329,7 @@ function TrangchuPages() {
           </div>
         </div>
       </div>
-      <div className="container" style={{ backgroundColor: "#4E95DB" }}>
+      <div className="container" style={{ backgroundColor: "rgba(78, 149, 219, 0.5)" }}>
         <div className="c01" style={{ position: "relative" }}>
           <img src={logo5} className="logo5" />
           <div style={{ marginTop: "-230px" }}>
@@ -388,7 +401,7 @@ function TrangchuPages() {
              </Link>
             </div>
             <div className="button1">
-             <Link to="/BaivietChitiet"> <button >Xem thêm bài viết</button> </Link>
+             <Link to="/BaivietPages"> <button >Xem thêm bài viết</button> </Link>
             </div>
           </div>
         </div>
