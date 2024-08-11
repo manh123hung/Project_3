@@ -11,6 +11,7 @@ import TuyendungPages from './pages/TuyendungPages/TuyendungPages';
 import TuyendungChitiet from './pages/TuyendungPages/TuyendungPages-Chitiet';
 import BaivietChitiet from './pages/BaivietPages/BaivietPages-chitiet';
 import BaivietPages from './pages/BaivietPages/BaivietPages';
+import MainLayout from './layouts/MainLayout';
 function App() {
   const [data, setData] = useState<DocumentData[]>([]);
 
