@@ -4,8 +4,8 @@ import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
 import { collection, DocumentData, getDocs } from "firebase/firestore";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { firestore, storage } from "../../lib/firebase";
-import Navbar from "../../component/Navbar";
-import Footer from "../../component/Footer";
+import Navbar from "../../components/Navbar";
+import Footer from "../../components/Footer";
 import "./TuyendungPages.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
