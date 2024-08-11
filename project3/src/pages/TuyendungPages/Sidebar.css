@@ -12,31 +12,39 @@
   margin-left: 42px;
   margin-top: 60px;
 }
-  .sidebar h4 {
-    margin-bottom: 10px;
-    color: #0054A6;
-    padding: 10px;
-  }
+.sidebar h4 {
+  margin-bottom: 10px;
+  color: #0054A6;
+  padding: 10px;
+}
   
-  .sidebar .button-group {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    margin-bottom: 10px;
-  }
+.sidebar .button-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 10px;
+}
   
-  .sidebar .button {
-    background-color: #fff;
-    border: 1px solid #ccc;
-    border-radius: 20px;
-    padding: 8px 15px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 14px;
-    cursor: pointer;
-    color: black;
-  }
+.sidebar .button {
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 20px;
+  padding: 8px 15px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 14px;
+  cursor: pointer;
+  color: black;
+}
+.sidebar .button.active {
+  background-color: #0054A6;
+  color: white;
+}
+
+.sidebar .button:hover {
+  background-color: #e9ecef;
+}
   .button-group .button:first-child {
     background-color: #0054A6;
     color: white; /* Thay đổi màu chữ để tương phản */

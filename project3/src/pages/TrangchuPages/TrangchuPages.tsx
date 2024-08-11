@@ -317,7 +317,7 @@ function TrangchuPages() {
               ))}
             </div>
             <br />
-            <button className="button">Xem chi tiết</button>
+           <Link to="/BaivietChitiet" className="button" style={{textDecoration:"none"}}>Xem chi tiết</Link> 
           </div>
           <div className="right-content">
             <div className="image-container image-container-top">

@@ -184,6 +184,19 @@ function BaivietPages() {
     setSearchText(suggestion);
     setSuggestionsVisible(false);
   };
+  const [activeIndex, setActiveIndex] = useState(0);
+
+  const handleClick = (index: number) => {
+    setActiveIndex(index);
+  };
+
+  const navItems = [
+    { icon: faLightbulb, label: 'Giới thiệu' },
+    { icon: faNewspaper, label: 'Tin tức' },
+    { icon: faCalendarAlt, label: 'Sự kiện' },
+    { icon: faBell, label: 'Thông báo' },
+    { icon: faUserFriends, label: 'Hoạt động đoàn thể' }
+  ];
   return (
     <div>
       <Navbar />
@@ -245,33 +258,19 @@ function BaivietPages() {
             >
               <b>CHỦ ĐỀ BÀI VIẾT</b>
             </h5>
-            <ul className="nav flex-column">
-              <li className="nav-item">
-                <Link className="nav-link active" to="#">
-                  <FontAwesomeIcon icon={faLightbulb} /> Giới thiệu{" "}
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link className="nav-link" to="#">
-                  <FontAwesomeIcon icon={faNewspaper} /> Tin tức{" "}
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link className="nav-link" to="#">
-                  <FontAwesomeIcon icon={faCalendarAlt} /> Sự kiện{" "}
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link className="nav-link" to="#">
-                  <FontAwesomeIcon icon={faBell} /> Thông báo{" "}
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link className="nav-link" to="#">
-                  <FontAwesomeIcon icon={faUserFriends} /> Hoạt động đoàn thể{" "}
-                </Link>
-              </li>
-            </ul>
+            <ul className="nav flex-column menu-ngang" style={{marginLeft:"-20px"}}>
+      {navItems.map((item, index) => (
+        <li key={index} className="nav-item">
+          <Link
+            className={`nav-link ${activeIndex === index ? 'active' : ''}`}
+            to="#"
+            onClick={() => handleClick(index)}
+          >
+            <FontAwesomeIcon icon={item.icon} /> {item.label}
+          </Link>
+        </li>
+      ))}
+    </ul>
             <img src={logo1} alt="" className="logo7"  />
           </div>
           <div className="col-md-9">

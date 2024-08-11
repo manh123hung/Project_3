@@ -92,6 +92,21 @@ const Sidebar: React.FC = () => {
     setSearchText(suggestion);
     setSuggestionsVisible(false);
   };
+  const [activeButtons, setActiveButtons] = useState<string[]>([]);
+
+  const handleButtonClick = (label: string) => {
+    setActiveButtons((prevActiveButtons) =>
+      prevActiveButtons.includes(label)
+        ? prevActiveButtons.filter((item) => item !== label)
+        : [...prevActiveButtons, label]
+    );
+  };
+
+  const buttonData = {
+    "Linh vực": ["Hướng dẫn viên", "Kinh doanh", "Kỹ sư xây dựng", "Nhân viên kế toán", "Nhân viên kỹ thuật", "Nhân viên phục vụ"],
+    "Hình thức làm việc": ["Bán thời gian", "Nhân viên chính thức", "Theo ca", "Thực tập"],
+    "Nơi làm việc": ["Cà phê Vườn Đá", "NH Thủy Tạ Đầm Sen", "CVVH Đầm Sen", "Khách sạn Ngọc Lan", "Khách sạn Phú Thọ", "KDL Sinh Thái Vàm Sát", "Trung tâm DVĐL Đầm Sen", "VP PhuThoTourist"]
+  };
 
   return (
     <div className="col-md-3 sidebar">
@@ -147,41 +162,24 @@ const Sidebar: React.FC = () => {
       )}
 
       {/* Các thành phần khác */}
-      <h4>
-        <FontAwesomeIcon icon={faHome} /> Linh vực
-      </h4>
-      <div className="button-group">
-        <button className="button">Hướng dẫn viên</button>
-        <button className="button">Kinh doanh</button>
-        <button className="button">Kỹ sư xây dựng</button>
-        <button className="button">Nhân viên kế toán</button>
-        <button className="button">Nhân viên kỹ thuật</button>
-        <button className="button">Nhân viên phục vụ</button>
-      </div>
-
-      <h4>
-        <FontAwesomeIcon icon={faMapMarkerAlt} /> Hình thức làm việc
-      </h4>
-      <div className="button-group">
-        <button className="button">Bán thời gian</button>
-        <button className="button">Nhân viên chính thức</button>
-        <button className="button">Theo ca</button>
-        <button className="button">Thực tập</button>
-      </div>
-
-      <h4>
-        <FontAwesomeIcon icon={faPhoneAlt} /> Nơi làm việc
-      </h4>
-      <div className="button-group">
-        <button className="button">Cà phê Vườn Đá</button>
-        <button className="button">NH Thủy Tạ Đầm Sen</button>
-        <button className="button">CVVH Đầm Sen</button>
-        <button className="button">Khách sạn Ngọc Lan</button>
-        <button className="button">Khách sạn Phú Thọ</button>
-        <button className="button">KDL Sinh Thái Vàm Sát</button>
-        <button className="button">Trung tâm DVĐL Đầm Sen</button>
-        <button className="button">VP PhuThoTourist</button>
-      </div>
+      {Object.entries(buttonData).map(([category, buttons]) => (
+        <div key={category}>
+          <h4>
+            <FontAwesomeIcon icon={faHome} /> {category}
+          </h4>
+          <div className="button-group">
+            {buttons.map((button) => (
+              <button
+                key={button}
+                className={`button ${activeButtons.includes(button) ? "active" : ""}`}
+                onClick={() => handleButtonClick(button)}
+              >
+                {button}
+              </button>
+            ))}
+          </div>
+        </div>
+      ))}
       <img src={logo4} className="logo4" style={{ width: "300px", height: "250px" }} />
     </div>
   );
